@@ -1,3 +1,5 @@
+package classtasks;
+
 import java.util.Arrays;
 
 public class ArraySort {

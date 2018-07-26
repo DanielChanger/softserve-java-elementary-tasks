@@ -3,6 +3,19 @@ package envelope;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ *
+ *
+ * <h1>Lucky ticket.</h1>
+ *
+ * <p>This app aks user to enter two sides of envelope A and envelope B respectively.
+ * Then program automatically defines, which envelope can fit another<br>
+ * on a defined range.</p>
+ *
+ * @author Daniel Changer.
+ * @version 1.0.
+ * @since 2018-07-26.
+ */
 public class Envelope implements Comparable<Envelope> {
 
   /** Size of vertical side of an envelope. */
@@ -23,11 +36,10 @@ public class Envelope implements Comparable<Envelope> {
   }
 
   public Envelope changeOrientation() {
-    verticalSide += horizontalSide;
-    horizontalSide = verticalSide - horizontalSide;
-    verticalSide -= verticalSide;
-    return this;
+    return new Envelope(horizontalSide, verticalSide);
   }
+
+
   /**
    * Returns size of envelope horizontal side.
    *
@@ -36,6 +48,7 @@ public class Envelope implements Comparable<Envelope> {
   public double getHorizontalSide() {
     return horizontalSide;
   }
+
 
   /**
    * Sets new value of horizontal side of the envelope.
@@ -64,6 +77,7 @@ public class Envelope implements Comparable<Envelope> {
     this.verticalSide = verticalSide;
   }
 
+
   /**
    * Method for testing class.
    *
@@ -75,11 +89,11 @@ public class Envelope implements Comparable<Envelope> {
     String choice;
     Envelope envelopeA;
     Envelope envelopeB;
-    double[] sides;
+    Double[] sides;
     do {
       choice = null;
       scanner = null;
-      sides = new double[4];
+      sides = new Double[4];
       System.out.println("Envelope A");
       System.out.print("Vertical side: ");
       scanner = new Scanner(System.in);
@@ -113,32 +127,40 @@ public class Envelope implements Comparable<Envelope> {
           } else {
             envelopeA = new Envelope(sides[0], sides[1]);
             envelopeB = new Envelope(sides[2], sides[3]);
-            boolean flag;
-            if(envelopeA.compareTo(envelopeB) == 0){
-              if(envelopeA.compareTo(envelopeB.changeOrientation()) == 0){
-                 System.out.println("Envelopes equal and cannot be put in each other");
-              }
+
+            if (envelopeA.compareTo(envelopeB) == 0) {
+              System.out.println("Envelopes equal or just cannot cannot be put in each other ");
+            } else if (envelopeA.compareTo(envelopeB) < 0) {
+              System.out.println("Envelope A can be put in envelope B");
+            } else if (envelopeA.compareTo(envelopeB) > 0) {
+              System.out.println("Envelope B can be put in envelope A");
+            } else {
+              System.out.println("Envelopes don't fit each other");
             }
-//            if (envelopeA.compareTo(envelopeB) == 2) {
-//              System.out.println(
-//                  "Envelope A cannot be put in envelope B or vice versa, because one side of A is longer than B"
-//                      + " side with the same orientation, but in other orientation A side is shorter than B.");
-//            } else if (envelopeA.compareTo(envelopeB) < 0) {
-//              System.out.println("envelope.Envelope A can be put in envelope B");
-//            } else if (envelopeA.compareTo(envelopeB) > 0) {
-//              System.out.println("envelope.Envelope B can be put in envelope A");
-//            } else {
-//              System.out.println(
-//                  "Envelopes A and B are the same size or at least have one parameter with equivalent value or, "
-//                      + "so they cannot be put in each other");
-//            }
           }
+          //            if (envelopeA.compareTo(envelopeB) == 2) {
+          //              System.out.println(
+          //                  "Envelope A cannot be put in envelope B or vice versa, because one
+          // side of A is longer than B"
+          //                      + " side with the same orientation, but in other orientation A
+          // side is shorter than B.");
+          //            } else if (envelopeA.compareTo(envelopeB) < 0) {
+          //              System.out.println("envelope.Envelope A can be put in envelope B");
+          //            } else if (envelopeA.compareTo(envelopeB) > 0) {
+          //              System.out.println("envelope.Envelope B can be put in envelope A");
+          //            } else {
+          //              System.out.println(
+          //                  "Envelopes A and B are the same size or at least have one parameter
+          // with equivalent value or, "
+          //                      + "so they cannot be put in each other");
+          //            }
         }
       }
 
-      System.out.print("Do you want to try again? ");
+      System.out.print("\nDo you want to try again? ");
       scanner = new Scanner(System.in);
       choice = scanner.next();
+      System.out.println("\n");
     } while (choice == null || pattern.matcher(choice).matches());
   }
 
@@ -146,18 +168,45 @@ public class Envelope implements Comparable<Envelope> {
    * Method to compare two envelope.Envelope objects
    *
    * @param o envelope.Envelope object to be compared to
-   * @return Returns 0 if envelopes equal to each other or at least have one parameter with
-   *     equivalent value, 1 if envelope that calls method is bigger than the one from parameter,
-   *     and 2 .
+   * @return Returns 0 if envelopes equal to each other or they cannot fit each other, 1 if envelope that calls method is bigger than the one from parameter, and -1 if it's smaller.
    */
   @Override
   public int compareTo(Envelope o) {
-    if ((this.horizontalSide < o.horizontalSide && this.verticalSide < o.verticalSide)) {
-      return -1;
-    } else if ((this.verticalSide > o.verticalSide && this.horizontalSide > o.horizontalSide)) {
+    //    if ((this.horizontalSide < o.horizontalSide && this.verticalSide < o.verticalSide)) {
+    //      return -1;
+    //    } else if ((this.verticalSide > o.verticalSide && this.horizontalSide > o.horizontalSide))
+    // {
+    //      return 1;
+    //    } else {
+    //      return 0;
+    //    }
+    if (horizontalSide == o.horizontalSide && verticalSide == o.verticalSide
+        || horizontalSide == o.changeOrientation().horizontalSide
+            && verticalSide == o.changeOrientation().verticalSide) {
+      return 0;
+    } else if ((horizontalSide >= o.horizontalSide && verticalSide >= o.verticalSide)
+        || (horizontalSide >= o.changeOrientation().horizontalSide
+            && verticalSide >= o.changeOrientation().verticalSide)) {
       return 1;
+    } else if (!((horizontalSide >= o.horizontalSide && verticalSide >= o.verticalSide)
+        || (horizontalSide >= o.changeOrientation().horizontalSide
+            && verticalSide >= o.changeOrientation().verticalSide))) {
+      return 0;
+    } else if ((horizontalSide <= o.horizontalSide && verticalSide <= o.verticalSide)
+        || (horizontalSide <= o.changeOrientation().horizontalSide
+            && verticalSide <= o.changeOrientation().verticalSide)) {
+      return -1;
     } else {
       return 0;
     }
   }
+
+    public static void info() {
+    System.out.println(
+        "This app aks user to enter two sides of envelope A and envelope B respectively. \n" +
+                "Then program automatically defines, which envelope can fit another.\n" +
+                " Program asks user to enter a value, one at a time. \n" +
+                "Value mustn't be negative and if it contains a whole and a decimal part,\n" +
+                " it must be separated with a comma, not a dot ");
+    }
 }

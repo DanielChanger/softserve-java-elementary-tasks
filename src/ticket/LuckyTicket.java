@@ -1,15 +1,35 @@
 package ticket;
 
-import chess.ChessBoard;
-
 import java.util.regex.Pattern;
 
+/**
+ *
+ *
+ * <h1>Lucky ticket.</h1>
+ *
+ * <p>This app outputs a number of lucky tickets within user-defined range and<br>
+ * defines which method of counting lucky tickets finds more lucky tickets <br>
+ * on a defined range.</p>
+ *
+ * @author Daniel Changer.
+ * @version 1.0.
+ * @since 2018-07-26.
+ */
 public class LuckyTicket {
 
+  /** This method is an entry point of counting tickets. It validates parameters and calls simpleMethod and complexMethod
+   * @param min Minimal user-defined number of ticket
+   * @param max Maximum user-defined number of ticket
+   * @return It returns a string, that says which method found more
+   * lucky tickets within a range, or tells user about incorrect parameters
+   * (in this option methods simpleMethod and complexMethod will not launch)
+   */
   public static String numberOfTickets(String min, String max) {
-    if (min.length() != 6 || max.length() != 6) {
-      return "One or both parameters are incorrect. You should enter two numbers in a following"
-          + " way: 000001, 101010, 242156 etc.";
+    Pattern pattern = Pattern.compile("[0-9][0-9][0-9][0-9][0-9][0-9]");
+
+    if (!pattern.matcher(min).matches() || !pattern.matcher(max).matches()) {
+      return "One or both parameters are incorrect. \n"
+          + "You should enter two numbers in a following + way: 000001, 101010, 242156 etc.";
     }
     int counterSimple = simpleMethod(min, max);
     int counterComplex = complexMethod(min, max);
@@ -28,15 +48,28 @@ public class LuckyTicket {
     }
   }
 
+  /**Simple method that counts lucky tickets within a range in a specific way:
+   * if sum of left 3 numbers equals to sum of right 3 numbers of a ticket number, then the ticket is lucky
+   * @param min Minimal user-defined number of ticket
+   * @param max Maximum user-defined number of ticket
+   * @return Number of found lucky tickets
+   */
   private static int simpleMethod(String min, String max) {
-    int counter = 0;
-    int sum1 = 0, sum2 = 0;
+
+    int counter = (Integer.parseInt(min) == 0) ? 1 : 0;
+    int sum1 = 0;
+    int sum2 = 0;
     int[] firstPart = new int[3];
     int[] secondPart = new int[3];
-    int index1 = 0, index2 = 0;
+    int index1 = 0;
+    int index2 = 0;
+
     for (int i = Integer.parseInt(min); i <= Integer.parseInt(max); i++) {
-      for (int j = 0; j < 6; j++) {
-        if (index1 < 3) {
+      if (Integer.toString(i).length() < 4) {
+        continue;
+      }
+      for (int j = 0; j < Integer.toString(i).length(); j++) {
+        if (index1 < Integer.toString(i).length() / 2) {
           firstPart[index1] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
           sum1 += firstPart[index1++];
         } else {
@@ -53,15 +86,23 @@ public class LuckyTicket {
     return counter;
   }
 
+  /**Simple method that counts lucky tickets within a range in a specific way:
+   * if sum of left 3 numbers equals to sum of right 3 numbers of a ticket number, then the ticket is lucky
+   * @param min Minimal user-defined number of ticket
+   * @param max Maximum user-defined number of ticket
+   * @return Number of found lucky tickets
+   */
   private static int complexMethod(String min, String max) {
     int counter = 0;
-    int sum1 = 0, sum2 = 0;
+    int sum1 = 0;
+    int sum2 = 0;
     int[] even = new int[3];
     int[] odd = new int[3];
-    int index1 = 0, index2 = 0;
+    int index1 = 0;
+    int index2 = 0;
     for (int i = Integer.parseInt(min); i <= Integer.parseInt(max); i++) {
 
-      for (int j = 0; j < 6; j++) {
+      for (int j = 0; j < Integer.toString(i).length(); j++) {
         if (j % 2 == 0) {
           even[index1] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
           sum1 += even[index1++];
@@ -79,32 +120,33 @@ public class LuckyTicket {
     return counter;
   }
 
+  /**
+   * Method, which displays the rules of using this program, if there are no arguments passed from
+   * the command-line.
+   */
   public static void info() {
     System.out.println(
         "This program counts lucky tickets within numerical limits defined by user.\n"
             + " It counts using two methods at a time: simple and complex.\n"
             + " At the and of the program it will show you two numbers of lucky tickets counted \n"
             + "with two methods and define which method will count more tickets than another within \n"
-            + "a specific limit of numbers defined by users in command-line arguments. User have to enter "
-            + "two valid numbers numbers in a following way: 000001, 101010, 242156 etc."
-            + " Only two first arguments are significant other will be unnoticed.");
+            + "a specific limit of numbers defined by users in command-line arguments. User have to enter\n "
+            + "two valid numbers numbers in a following way: 000001, 101010, 242156 etc.\n"
+            + " Only two first arguments are significant other will be unnoticed.\n");
   }
 
+  /**
+   * Method to test class.
+   * @param args Command-line arguments.
+   */
   public static void main(String[] args) {
-    try {
-      Pattern pattern = Pattern.compile("[^0-9]+");
-      if (args.length == 0) {
-        info();
-      } else if (args.length != 2
-          || pattern.matcher(args[0]).find()
-          || pattern.matcher(args[1]).find()) {
-        System.out.print("You should have entered two or more arguments");
-      } else {
-        System.out.println(numberOfTickets("000001", "000002"));
-      }
 
-    } catch (Exception e) {
-      System.out.println("Something went wrong");
+    if (args.length == 0) {
+      info();
+    } else if (args.length != 2) {
+      System.out.println("You should have entered two or more arguments.");
+    } else {
+      System.out.println(numberOfTickets(args[0], args[1]));
     }
   }
 }
