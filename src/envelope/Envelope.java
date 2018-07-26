@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  *
  *
- * <h1>Lucky ticket.</h1>
+ * <h1>Envelopes analyzer</h1>
  *
  * <p>This app aks user to enter two sides of envelope A and envelope B respectively.
  * Then program automatically defines, which envelope can fit another<br>
