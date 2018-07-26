@@ -1,0 +1,163 @@
+package envelope;
+
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class Envelope implements Comparable<Envelope> {
+
+  /** Size of vertical side of an envelope. */
+  private double verticalSide;
+
+  /** Size of horizontal side of an envelope. */
+  private double horizontalSide;
+
+  /**
+   * Constructor of envelope
+   *
+   * @param verticalSide Size of vertical side of envelope.
+   * @param horizontalSide Size of horizontal side of envelope.
+   */
+  public Envelope(double verticalSide, double horizontalSide) {
+    this.verticalSide = verticalSide;
+    this.horizontalSide = horizontalSide;
+  }
+
+  public Envelope changeOrientation() {
+    verticalSide += horizontalSide;
+    horizontalSide = verticalSide - horizontalSide;
+    verticalSide -= verticalSide;
+    return this;
+  }
+  /**
+   * Returns size of envelope horizontal side.
+   *
+   * @return Size of vertical side of the envelope.
+   */
+  public double getHorizontalSide() {
+    return horizontalSide;
+  }
+
+  /**
+   * Sets new value of horizontal side of the envelope.
+   *
+   * @param horizontalSide new horizontal side value
+   */
+  public void setHorizontalSide(double horizontalSide) {
+    this.horizontalSide = horizontalSide;
+  }
+
+  /**
+   * Returns size of envelope vertical side.
+   *
+   * @return Size of vertical side of the envelope.
+   */
+  public double getVerticalSide() {
+    return verticalSide;
+  }
+
+  /**
+   * Sets new value of vertical side of the envelope
+   *
+   * @param verticalSide new vertical side value
+   */
+  public void setVerticalSide(double verticalSide) {
+    this.verticalSide = verticalSide;
+  }
+
+  /**
+   * Method for testing class.
+   *
+   * @param args Command-line arguments
+   */
+  public static void main(String[] args) {
+    Scanner scanner;
+    Pattern pattern = Pattern.compile("(y|yes)", Pattern.CASE_INSENSITIVE);
+    String choice;
+    Envelope envelopeA;
+    Envelope envelopeB;
+    double[] sides;
+    do {
+      choice = null;
+      scanner = null;
+      sides = new double[4];
+      System.out.println("Envelope A");
+      System.out.print("Vertical side: ");
+      scanner = new Scanner(System.in);
+      if (!scanner.hasNextDouble() || (sides[0] = scanner.nextDouble()) <= 0) {
+        System.out.println(
+            "Please, enter a positive double value using comma to separate a whole and a decimal part\n\n");
+        continue;
+      } else {
+        System.out.print("Horizontal side: ");
+        scanner = new Scanner(System.in);
+        if (!scanner.hasNextDouble() || (sides[1] = scanner.nextDouble()) <= 0) {
+          System.out.println(
+              "Please, enter a positive double value using comma to separate a whole and a decimal part\n\n");
+          continue;
+        } else {
+          System.out.println("\nEnvelope B");
+          System.out.print("Vertical side: ");
+          scanner = new Scanner(System.in);
+          if (!scanner.hasNextDouble() || (sides[2] = scanner.nextDouble()) <= 0) {
+            System.out.println(
+                "Please, enter a positive double value using comma to separate a whole and a decimal part\n\n");
+            continue;
+          } else {
+            System.out.print("Horizontal side: ");
+            scanner = new Scanner(System.in);
+          }
+          if (!scanner.hasNextDouble() || (sides[3] = scanner.nextDouble()) <= 0) {
+            System.out.println(
+                "Please, enter a positive double value using comma to separate a whole and a decimal part\n\n");
+            continue;
+          } else {
+            envelopeA = new Envelope(sides[0], sides[1]);
+            envelopeB = new Envelope(sides[2], sides[3]);
+            boolean flag;
+            if(envelopeA.compareTo(envelopeB) == 0){
+              if(envelopeA.compareTo(envelopeB.changeOrientation()) == 0){
+                 System.out.println("Envelopes equal and cannot be put in each other");
+              }
+            }
+//            if (envelopeA.compareTo(envelopeB) == 2) {
+//              System.out.println(
+//                  "Envelope A cannot be put in envelope B or vice versa, because one side of A is longer than B"
+//                      + " side with the same orientation, but in other orientation A side is shorter than B.");
+//            } else if (envelopeA.compareTo(envelopeB) < 0) {
+//              System.out.println("envelope.Envelope A can be put in envelope B");
+//            } else if (envelopeA.compareTo(envelopeB) > 0) {
+//              System.out.println("envelope.Envelope B can be put in envelope A");
+//            } else {
+//              System.out.println(
+//                  "Envelopes A and B are the same size or at least have one parameter with equivalent value or, "
+//                      + "so they cannot be put in each other");
+//            }
+          }
+        }
+      }
+
+      System.out.print("Do you want to try again? ");
+      scanner = new Scanner(System.in);
+      choice = scanner.next();
+    } while (choice == null || pattern.matcher(choice).matches());
+  }
+
+  /**
+   * Method to compare two envelope.Envelope objects
+   *
+   * @param o envelope.Envelope object to be compared to
+   * @return Returns 0 if envelopes equal to each other or at least have one parameter with
+   *     equivalent value, 1 if envelope that calls method is bigger than the one from parameter,
+   *     and 2 .
+   */
+  @Override
+  public int compareTo(Envelope o) {
+    if ((this.horizontalSide < o.horizontalSide && this.verticalSide < o.verticalSide)) {
+      return -1;
+    } else if ((this.verticalSide > o.verticalSide && this.horizontalSide > o.horizontalSide)) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+}
