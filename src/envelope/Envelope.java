@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 /**
  *
  *
- * <h1>Envelopes analyzer</h1>
+ * <h1>Envelopes analyzer.</h1>
  *
- * <p>This app aks user to enter two sides of envelope A and envelope B respectively.
- * Then program automatically defines, which envelope can fit another<br>
- * on a defined range.</p>
+ * <p>This app aks user to enter two sides of envelope A and envelope B respectively. Then program
+ * automatically defines, which envelope can fit another<br>
+ * on a defined range.
  *
  * @author Daniel Changer.
  * @version 1.0.
@@ -25,7 +25,7 @@ public class Envelope implements Comparable<Envelope> {
   private double horizontalSide;
 
   /**
-   * Constructor of envelope
+   * Constructor of envelope.
    *
    * @param verticalSide Size of vertical side of envelope.
    * @param horizontalSide Size of horizontal side of envelope.
@@ -35,10 +35,9 @@ public class Envelope implements Comparable<Envelope> {
     this.horizontalSide = horizontalSide;
   }
 
-  public Envelope changeOrientation() {
+    private Envelope changeOrientation() {
     return new Envelope(horizontalSide, verticalSide);
   }
-
 
   /**
    * Returns size of envelope horizontal side.
@@ -48,7 +47,6 @@ public class Envelope implements Comparable<Envelope> {
   public double getHorizontalSide() {
     return horizontalSide;
   }
-
 
   /**
    * Sets new value of horizontal side of the envelope.
@@ -69,19 +67,18 @@ public class Envelope implements Comparable<Envelope> {
   }
 
   /**
-   * Sets new value of vertical side of the envelope
+   * Sets new value of vertical side of the envelope.
    *
-   * @param verticalSide new vertical side value
+   * @param verticalSide new vertical side value.
    */
   public void setVerticalSide(double verticalSide) {
     this.verticalSide = verticalSide;
   }
 
-
   /**
    * Method for testing class.
    *
-   * @param args Command-line arguments
+   * @param args Command-line arguments.
    */
   public static void main(String[] args) {
     Scanner scanner;
@@ -168,7 +165,8 @@ public class Envelope implements Comparable<Envelope> {
    * Method to compare two envelope.Envelope objects
    *
    * @param o envelope.Envelope object to be compared to
-   * @return Returns 0 if envelopes equal to each other or they cannot fit each other, 1 if envelope that calls method is bigger than the one from parameter, and -1 if it's smaller.
+   * @return Returns 0 if envelopes equal to each other or they cannot fit each other, 1 if envelope
+   *     that calls method is bigger than the one from parameter, and -1 if it's smaller.
    */
   @Override
   public int compareTo(Envelope o) {
@@ -201,12 +199,16 @@ public class Envelope implements Comparable<Envelope> {
     }
   }
 
+    /**
+     * Method, which displays the rules of using this program, if there are no arguments passed from
+     * the command-line.
+     */
     public static void info() {
-    System.out.println(
-        "This app aks user to enter two sides of envelope A and envelope B respectively. \n" +
-                "Then program automatically defines, which envelope can fit another.\n" +
-                " Program asks user to enter a value, one at a time. \n" +
-                "Value mustn't be negative and if it contains a whole and a decimal part,\n" +
-                " it must be separated with a comma, not a dot ");
+        System.out.println(
+                "This app aks user to enter two sides of envelope A and envelope B respectively. \n"
+                        + "Then program automatically defines, which envelope can fit another.\n"
+                        + " Program asks user to enter a value, one at a time. \n"
+                        + "Value mustn't be negative and if it contains a whole and a decimal part,\n"
+                        + " it must be separated with a comma, not a dot ");
     }
 }
