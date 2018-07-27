@@ -38,68 +38,67 @@ public class StringTasks {
     //      }
     //    }
 
+    //   Scanner scanner = new Scanner(System.in);
+    //    String[] words = scanner.nextLine().split(" ");
+    //
+    //    int max = 0;
+    //    String pointer = new String("");
+    //    ArrayList<String> maxWords = new ArrayList<>();
+    //    boolean flag = true;
+    //    StringBuilder secondWord = new StringBuilder(words[1]);
+    //    for (String temp : words) {
+    //      if (temp.length() > max) {
+    //        max = temp.length();
+    //        pointer = temp;
+    //        maxWords.clear();
+    //      } else if (temp.length() == max) {
+    //        if (flag) {
+    //          maxWords.add(pointer);
+    //          flag = false;
+    //        }
+    //          maxWords.add(temp);
+    //      }
+    //    }
+    //
+    //    String res = (maxWords.size() > 0 ? Arrays.toString(maxWords.toArray()) : pointer);
+    //    System.out.println(
+    //        "The longest strings: "
+    //            + res
+    //            + "\n"
+    //            + "Its size: "
+    //            + max
+    //            + "\nSecond word is "
+    //            + "\""
+    //            + secondWord.reverse()
+    //            + "\"\n\n");
 
-      //   Scanner scanner = new Scanner(System.in);
-//    String[] words = scanner.nextLine().split(" ");
-//
-//    int max = 0;
-//    String pointer = new String("");
-//    ArrayList<String> maxWords = new ArrayList<>();
-//    boolean flag = true;
-//    StringBuilder secondWord = new StringBuilder(words[1]);
-//    for (String temp : words) {
-//      if (temp.length() > max) {
-//        max = temp.length();
-//        pointer = temp;
-//        maxWords.clear();
-//      } else if (temp.length() == max) {
-//        if (flag) {
-//          maxWords.add(pointer);
-//          flag = false;
-//        }
-//          maxWords.add(temp);
-//      }
-//    }
-//
-//    String res = (maxWords.size() > 0 ? Arrays.toString(maxWords.toArray()) : pointer);
-//    System.out.println(
-//        "The longest strings: "
-//            + res
-//            + "\n"
-//            + "Its size: "
-//            + max
-//            + "\nSecond word is "
-//            + "\""
-//            + secondWord.reverse()
-//            + "\"\n\n");
+    //        String str = "I  am learning  Java   Core";
+    //
+    //        String[] array = str.split("\\s+");
+    //        String res = "";
+    //        Pattern pattern = Pattern.compile("(am|have|has|are)", Pattern.CASE_INSENSITIVE);
+    //        for (String temp : array) {
+    //          if (temp.matches("(am)")) {
+    //            res += "\b'm ";
+    //            continue;
+    //          }
+    //          if (temp.matches("(are)")) {
+    //            res += "\b're ";
+    //            continue;
+    //          }
+    //          if (temp.matches("(is|has)")) {
+    //            res += "\b's ";
+    //            continue;
+    //          }
+    //          if (temp.matches("(have)")) {
+    //            res += "\b've ";
+    //            continue;
+    //          }
+    //          res += temp + " ";
+    //        }
+    //        System.out.println(res);
 
-//        String str = "I  am learning  Java   Core";
-//
-//        String[] array = str.split("\\s+");
-//        String res = "";
-//        Pattern pattern = Pattern.compile("(am|have|has|are)", Pattern.CASE_INSENSITIVE);
-//        for (String temp : array) {
-//          if (temp.matches("(am)")) {
-//            res += "\b'm ";
-//            continue;
-//          }
-//          if (temp.matches("(are)")) {
-//            res += "\b're ";
-//            continue;
-//          }
-//          if (temp.matches("(is|has)")) {
-//            res += "\b's ";
-//            continue;
-//          }
-//          if (temp.matches("(have)")) {
-//            res += "\b've ";
-//            continue;
-//          }
-//          res += temp + " ";
-//        }
-//        System.out.println(res);
-
-     Pattern pattern = Pattern.compile("^[$]/d");
-     System.out.println(pattern.matcher("$23.0").find());
+    Pattern pattern = Pattern.compile("^[$][0-9]+(.|,)?[0-9]{0,}");
+    System.out.println(pattern.matcher("$0.2").matches());
   }
 }

@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 /**
  *
- *
  * <h1>Envelopes analyzer.</h1>
  *
  * <p>This app aks user to enter two sides of envelope A and envelope B respectively. Then program
@@ -35,7 +34,7 @@ public class Envelope implements Comparable<Envelope> {
     this.horizontalSide = horizontalSide;
   }
 
-    private Envelope changeOrientation() {
+  private Envelope changeOrientation() {
     return new Envelope(horizontalSide, verticalSide);
   }
 
@@ -135,22 +134,6 @@ public class Envelope implements Comparable<Envelope> {
               System.out.println("Envelopes don't fit each other");
             }
           }
-          //            if (envelopeA.compareTo(envelopeB) == 2) {
-          //              System.out.println(
-          //                  "Envelope A cannot be put in envelope B or vice versa, because one
-          // side of A is longer than B"
-          //                      + " side with the same orientation, but in other orientation A
-          // side is shorter than B.");
-          //            } else if (envelopeA.compareTo(envelopeB) < 0) {
-          //              System.out.println("envelope.Envelope A can be put in envelope B");
-          //            } else if (envelopeA.compareTo(envelopeB) > 0) {
-          //              System.out.println("envelope.Envelope B can be put in envelope A");
-          //            } else {
-          //              System.out.println(
-          //                  "Envelopes A and B are the same size or at least have one parameter
-          // with equivalent value or, "
-          //                      + "so they cannot be put in each other");
-          //            }
         }
       }
 
@@ -170,14 +153,6 @@ public class Envelope implements Comparable<Envelope> {
    */
   @Override
   public int compareTo(Envelope o) {
-    //    if ((this.horizontalSide < o.horizontalSide && this.verticalSide < o.verticalSide)) {
-    //      return -1;
-    //    } else if ((this.verticalSide > o.verticalSide && this.horizontalSide > o.horizontalSide))
-    // {
-    //      return 1;
-    //    } else {
-    //      return 0;
-    //    }
     if (horizontalSide == o.horizontalSide && verticalSide == o.verticalSide
         || horizontalSide == o.changeOrientation().horizontalSide
             && verticalSide == o.changeOrientation().verticalSide) {
@@ -186,10 +161,7 @@ public class Envelope implements Comparable<Envelope> {
         || (horizontalSide >= o.changeOrientation().horizontalSide
             && verticalSide >= o.changeOrientation().verticalSide)) {
       return 1;
-    } else if (!((horizontalSide >= o.horizontalSide && verticalSide >= o.verticalSide)
-        || (horizontalSide >= o.changeOrientation().horizontalSide
-            && verticalSide >= o.changeOrientation().verticalSide))) {
-      return 0;
+
     } else if ((horizontalSide <= o.horizontalSide && verticalSide <= o.verticalSide)
         || (horizontalSide <= o.changeOrientation().horizontalSide
             && verticalSide <= o.changeOrientation().verticalSide)) {
@@ -199,16 +171,16 @@ public class Envelope implements Comparable<Envelope> {
     }
   }
 
-    /**
-     * Method, which displays the rules of using this program, if there are no arguments passed from
-     * the command-line.
-     */
-    public static void info() {
-        System.out.println(
-                "This app aks user to enter two sides of envelope A and envelope B respectively. \n"
-                        + "Then program automatically defines, which envelope can fit another.\n"
-                        + " Program asks user to enter a value, one at a time. \n"
-                        + "Value mustn't be negative and if it contains a whole and a decimal part,\n"
-                        + " it must be separated with a comma, not a dot ");
-    }
+  /**
+   * Method, which displays the rules of using this program, if there are no arguments passed from
+   * the command-line.
+   */
+  public static void info() {
+    System.out.println(
+        "This app aks user to enter two sides of envelope A and envelope B respectively. \n"
+            + "Then program automatically defines, which envelope can fit another.\n"
+            + " Program asks user to enter a value, one at a time. \n"
+            + "Value mustn't be negative and if it contains a whole and a decimal part,\n"
+            + " it must be separated with a comma, not a dot ");
+  }
 }

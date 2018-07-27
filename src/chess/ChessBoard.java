@@ -41,11 +41,11 @@ public class ChessBoard {
    */
   public static void info() {
     System.out.println(
-        "This program displays a chess board with custom size."
-            + " You should enter two arguments in numerical representation:"
-            + " height and width of the board respectively"
-            + "Only first two arguments will be significant, other will be ignored."
-            + "If at least one significant argument is wrong, board characteristics will "
+        "This program displays a chess board with custom size.\n"
+            + " You should enter two arguments in numerical representation:\n"
+            + " height and width of the board respectively\n"
+            + "Only first two arguments will be significant, other will be ignored.\n"
+            + "If at least one significant argument is wrong, board characteristics will \n"
             + "be set up to default (8x8)");
   }
 
