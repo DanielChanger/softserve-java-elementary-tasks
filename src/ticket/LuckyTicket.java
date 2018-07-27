@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  *
  * <p>This app outputs a number of lucky tickets within user-defined range and<br>
  * defines which method of counting lucky tickets finds more lucky tickets <br>
- * on a defined range.</p>
+ * on a defined range.
  *
  * @author Daniel Changer.
  * @version 1.0.
@@ -17,12 +17,15 @@ import java.util.regex.Pattern;
  */
 public class LuckyTicket {
 
-  /** This method is an entry point of counting tickets. It validates parameters and calls simpleMethod and complexMethod
+  /**
+   * This method is an entry point of counting tickets. It validates parameters and calls
+   * simpleMethod and complexMethod
+   *
    * @param min Minimal user-defined number of ticket
    * @param max Maximum user-defined number of ticket
-   * @return It returns a string, that says which method found more
-   * lucky tickets within a range, or tells user about incorrect parameters
-   * (in this option methods simpleMethod and complexMethod will not launch)
+   * @return It returns a string, that says which method found more lucky tickets within a range, or
+   *     tells user about incorrect parameters (in this option methods simpleMethod and
+   *     complexMethod will not launch)
    */
   public static String numberOfTickets(String min, String max) {
     Pattern pattern = Pattern.compile("[0-9][0-9][0-9][0-9][0-9][0-9]");
@@ -48,8 +51,10 @@ public class LuckyTicket {
     }
   }
 
-  /**Simple method that counts lucky tickets within a range in a specific way:
-   * if sum of left 3 numbers equals to sum of right 3 numbers of a ticket number, then the ticket is lucky
+  /**
+   * Simple method that counts lucky tickets within a range in a specific way: if sum of left 3
+   * numbers equals to sum of right 3 numbers of a ticket number, then the ticket is lucky
+   *
    * @param min Minimal user-defined number of ticket
    * @param max Maximum user-defined number of ticket
    * @return Number of found lucky tickets
@@ -86,8 +91,10 @@ public class LuckyTicket {
     return counter;
   }
 
-  /**Simple method that counts lucky tickets within a range in a specific way:
-   * if sum of left 3 numbers equals to sum of right 3 numbers of a ticket number, then the ticket is lucky
+  /**
+   * Simple method that counts lucky tickets within a range in a specific way: if sum of left 3
+   * numbers equals to sum of right 3 numbers of a ticket number, then the ticket is lucky
+   *
    * @param min Minimal user-defined number of ticket
    * @param max Maximum user-defined number of ticket
    * @return Number of found lucky tickets
@@ -137,6 +144,7 @@ public class LuckyTicket {
 
   /**
    * Method to test class.
+   *
    * @param args Command-line arguments.
    */
   public static void main(String[] args) {
