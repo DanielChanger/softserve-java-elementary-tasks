@@ -66,27 +66,27 @@ public class LuckyTicket {
     int sumOfRightPart = 0;
     int[] firstPart = new int[3];
     int[] secondPart = new int[3];
-    int index1 = 0;
-    int index2 = 0;
+    int indexOfLeftPart = 0;
+    int indexOfRightPart = 0;
 
     for (int i = Integer.parseInt(min); i <= Integer.parseInt(max); i++) {
       if (Integer.toString(i).length() < 4) {
         continue;
       }
       for (int j = 0; j < Integer.toString(i).length(); j++) {
-        if (index1 < Integer.toString(i).length() / 2) {
-          firstPart[index1] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
-          sumOfLeftPart += firstPart[index1++];
+        if (indexOfLeftPart < Integer.toString(i).length() / 2) {
+          firstPart[indexOfLeftPart] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
+          sumOfLeftPart += firstPart[indexOfLeftPart++];
         } else {
-          secondPart[index2] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
-          sumOfRightPart += secondPart[index2++];
+          secondPart[indexOfRightPart] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
+          sumOfRightPart += secondPart[indexOfRightPart++];
         }
       }
       if (sumOfLeftPart == sumOfRightPart) {
         counter++;
       }
       sumOfLeftPart = sumOfRightPart = 0;
-      index1 = index2 = 0;
+      indexOfLeftPart = indexOfRightPart = 0;
     }
     return counter;
   }
@@ -105,23 +105,23 @@ public class LuckyTicket {
     int sumOfOdd = 0;
     int[] even = new int[3];
     int[] odd = new int[3];
-    int index1 = 0;
-    int index2 = 0;
+    int indexOfEven = 0;
+    int indexOfOdd = 0;
     for (int i = Integer.parseInt(min); i <= Integer.parseInt(max); i++) {
 
       for (int j = 0; j < Integer.toString(i).length(); j++) {
         if (j % 2 == 0) {
-          even[index1] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
-          sumOfEven += even[index1++];
+          even[indexOfEven] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
+          sumOfEven += even[indexOfEven++];
         } else {
-          odd[index2] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
-          sumOfOdd += odd[index2++];
+          odd[indexOfOdd] = Integer.parseInt(Integer.toString(i).substring(j, j + 1));
+          sumOfOdd += odd[indexOfOdd++];
         }
       }
       if (sumOfEven == sumOfOdd) {
         counter++;
       }
-      index1 = index2 = 0;
+      indexOfEven = indexOfOdd = 0;
       sumOfEven = sumOfOdd = 0;
     }
     return counter;
