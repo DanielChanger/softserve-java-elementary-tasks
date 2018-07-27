@@ -88,7 +88,6 @@ public class Envelope implements Comparable<Envelope> {
     Double[] sides;
     do {
       choice = null;
-      scanner = null;
       sides = new Double[4];
       System.out.println("Envelope A");
       System.out.print("Vertical side: ");
@@ -141,7 +140,7 @@ public class Envelope implements Comparable<Envelope> {
       scanner = new Scanner(System.in);
       choice = scanner.next();
       System.out.println("\n");
-    } while (choice == null || pattern.matcher(choice).matches());
+    } while (pattern.matcher(choice).matches());
   }
 
   /**
