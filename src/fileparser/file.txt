@@ -1,0 +1,5 @@
+You can think of the Path as storing these name elements as a sequence.
+The highest element in the directory structure might be located at, index 0.
+ The lowest element in the directory structure might be located at index [n-1],
+ where n is the number of name elements in the Path. Methods are available for
+ retrieving individual elements or a subsequence of the Path using these indexes.
