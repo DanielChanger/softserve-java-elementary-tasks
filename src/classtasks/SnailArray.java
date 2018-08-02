@@ -2,8 +2,8 @@ package classtasks;
 
 public class SnailArray {
 
-  public void main(String[] args) {
-      System.out.print("\n\nsafa asdg\t\tsada".trim());
+    public void main(String[] args) {
+        System.out.print("\n\nsafa asdg\t\tsada".trim());
 //    int m = 5;
 //    int[][] arr = new int[m][m];
 //    int top = 0, bottom = 4, left = 0, right = 4;
@@ -20,5 +20,5 @@ public class SnailArray {
 //      }
 //    }
 // //   index++;
-}
+    }
 }
