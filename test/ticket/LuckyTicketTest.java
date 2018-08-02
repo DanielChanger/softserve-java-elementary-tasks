@@ -39,27 +39,27 @@ public class LuckyTicketTest {
         };
     }
 
-    @DataProvider(name = "command-line invalid arguments")
-    public static Object[][] getCMValidArgs() {
-
-        return new Object[][]{
-                {"999999"},
-                {"847535", "643164", "146724"},
-
-        };
-    }
-
-    @DataProvider(name = "command-line valid arguments")
-    public static Object[][] getCMInvalidArgs() {
-
-        return new Object[][]{
-                {null},
-                {"000001", "999999"},
-                {"010101", "101010"},
-                {"513625", "847535"},
-                {"043164", "146724"},
-        };
-    }
+//    @DataProvider(name = "command-line invalid arguments")
+//    public static Object[][] getCMValidArgs() {
+//
+//        return new Object[][]{
+//                {"999999"},
+//                {"847535", "643164", "146724"},
+//
+//        };
+//    }
+//
+//    @DataProvider(name = "command-line valid arguments")
+//    public static Object[][] getCMInvalidArgs() {
+//
+//        return new Object[][]{
+//                {null},
+//                {"000001", "999999"},
+//                {"010101", "101010"},
+//                {"513625", "847535"},
+//                {"043164", "146724"},
+//        };
+//    }
 
     @Test(dataProvider = "invalid numbers", expectedExceptions = {IllegalArgumentException.class, NullPointerException.class})
     public void testNumberOfTicketsWithInvalidValues(String numberMinimum, String numberMaximum) {
@@ -78,28 +78,28 @@ public class LuckyTicketTest {
         assertNull(ex);
     }
 
-    @Test(dataProvider = "command-line invalid arguments", expectedExceptions = {Exception.class})
-    public void testNumberOfTicketsMain_Invalid_Args(String[] args) {
-        if (args.length == 1) {
-            LuckyTicket.main(new String[]{args[0]});
-        } else {
-            LuckyTicket.main(new String[]{args[0]});
-        }
-    }
-
-    @Test(dataProvider = "command-line valid arguments")
-    public void testNumberOfTicketsMain_Valid_Args(String[] args) {
-        Exception ex = null;
-        try {
-            if (args == null) {
-                LuckyTicket.main(new String[0]);
-            } else {
-                LuckyTicket.main(new String[]{args[0], args[1]});
-            }
-        } catch (Exception e) {
-            ex = e;
-        }
-        assertNull(ex);
-
-    }
+//    @Test(dataProvider = "command-line invalid arguments", expectedExceptions = {Exception.class})
+//    public void testNumberOfTicketsMain_Invalid_Args(String[] args) {
+//        if (args.length == 1) {
+//            LuckyTicket.main(new String[]{args[0]});
+//        } else {
+//            LuckyTicket.main(new String[]{args[0]});
+//        }
+//    }
+//
+//    @Test(dataProvider = "command-line valid arguments")
+//    public void testNumberOfTicketsMain_Valid_Args(String[] args) {
+//        Exception ex = null;
+//        try {
+//            if (args == null) {
+//                LuckyTicket.main(new String[0]);
+//            } else {
+//                LuckyTicket.main(new String[]{args[0], args[1]});
+//            }
+//        } catch (Exception e) {
+//            ex = e;
+//        }
+//        assertNull(ex);
+//
+//    }
 }
