@@ -1,7 +1,5 @@
 package chess;
 
-import java.util.Collection;
-
 /**
  * <h1>Chess board.</h1>
  *
@@ -37,7 +35,7 @@ public class ChessBoard {
     private ChessBoard(int height, int width) {
         this.height = height;
         this.width = width;
-        boardRepresentation = paintBoard();
+        boardRepresentation = paintBoard(); //creating viewable representation of the board
     }
 
     /**
@@ -69,31 +67,28 @@ public class ChessBoard {
      * @return Returns chess board representation
      */
     private StringBuilder paintBoard() {
-        StringBuilder board = new StringBuilder();
+        StringBuilder board = new StringBuilder(); //var to append into it the board and return it
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (i % 2 == 0) {
-                    if (j % 2 == 0) {
+                if (i % 2 == 0) { // if line of the board has even index
+                    if (j % 2 == 0) {  // if cell has even index
                         board.append("*");
                     } else {
-                        if(j == width - 1) {
-                            break;
-                        }
                         board.append(" ");
                     }
-
                 } else {
-                    if (j % 2 != 0) {
+                    if (j % 2 != 0) {  // if cell has odd index
                         board.append("*");
                     } else {
                         board.append(" ");
                     }
                 }
             }
-            if(i != height - 1){
+            if ((i != height - 1)) {  // to avoid '\n' character in the end of the las line
                 board.append("\n");
             }
         }
+
         return board;
     }
 

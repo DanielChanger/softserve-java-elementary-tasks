@@ -1,13 +1,9 @@
 package numbersequence;
 
-import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 import java.util.Collection;
