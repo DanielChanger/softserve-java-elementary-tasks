@@ -4,12 +4,10 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.*;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(Enclosed.class)
 public class ChessBoardTest {
@@ -63,7 +61,7 @@ public class ChessBoardTest {
             };
         }
 
-        @Parameter(0)
+        @Parameter
         public int height;
         @Parameter(1)
         public int width;
