@@ -63,7 +63,7 @@ public class ChessBoardTest {
             };
         }
 
-        @Parameter
+        @Parameter(0)
         public int height;
         @Parameter(1)
         public int width;
