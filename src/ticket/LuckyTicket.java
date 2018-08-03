@@ -15,6 +15,9 @@ import java.util.regex.Pattern;
  */
 public class LuckyTicket {
 
+    private final static int LENGTH_OF_NUMBER = 6;
+
+
     /**
      * This method is an entry point of counting tickets. It validates parameters and calls
      * simpleMethod and complexMethod
@@ -26,15 +29,7 @@ public class LuckyTicket {
      * complexMethod will not launch)
      */
     public static String numberOfTickets(String min, String max) throws IllegalArgumentException, NullPointerException {
-        Pattern pattern = Pattern.compile("[0-9]{6}");
 
-        if (!pattern.matcher(min).matches() || !pattern.matcher(max).matches()) {
-            throw new IllegalArgumentException("One or both parameters are incorrect. \n"
-                    + "You should enter two numbers in a following + way: 000001, 101010, 242156 etc.");
-        }
-        if (Integer.parseInt(min) > Integer.parseInt(max)) {
-            throw new IllegalArgumentException("Minimum value cannot be greater than maximum");
-        }
         int counterSimple = simpleMethod(min, max);
         int counterComplex = complexMethod(min, max);
         if (counterSimple > counterComplex) {
@@ -52,6 +47,18 @@ public class LuckyTicket {
         }
     }
 
+    private void validateParams(String min, String max) {
+        Pattern pattern = Pattern.compile("[0-9]{6}");
+
+        if (!pattern.matcher(min).matches() || !pattern.matcher(max).matches()) {
+            throw new IllegalArgumentException("One or both parameters are incorrect. \n"
+                    + "You should enter two numbers in a following + way: 000001, 101010, 242156 etc.");
+        }
+        if (Integer.parseInt(min) > Integer.parseInt(max)) {
+            throw new IllegalArgumentException("Minimum value cannot be greater than maximum");
+        }
+    }
+
     /**
      * Simple method that counts lucky tickets within a range in a specific way: if sum of left 3
      * numbers equals to sum of right 3 numbers of a ticket number, then the ticket is lucky
@@ -63,15 +70,15 @@ public class LuckyTicket {
     private static int simpleMethod(String min, String max) {
         StringBuilder ticketNumber = new StringBuilder();
         int counter = 0;
-        int sumOfLeftPart = 0;
-        int sumOfRightPart = 0;
+        int sumOfLeftPart;
+        int sumOfRightPart;
         for (int i = Integer.parseInt(min); i <= Integer.parseInt(max); i++) {
+            sumOfLeftPart = sumOfRightPart = 0;
             ticketNumber.append(i);
-            while (ticketNumber.length() < 6) {
+            while (ticketNumber.length() < LENGTH_OF_NUMBER) {
                 ticketNumber.insert(0, 0);
             }
-            //System.out.println(ticketNumber);
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < LENGTH_OF_NUMBER / 2; j++) {
                 sumOfLeftPart += Integer.parseInt(ticketNumber.charAt(j) + "");
                 sumOfRightPart += Integer.parseInt(ticketNumber.charAt(j + 3) + "");
             }
@@ -79,7 +86,6 @@ public class LuckyTicket {
                 counter++;
             }
             ticketNumber.delete(0, 6);
-            sumOfLeftPart = sumOfRightPart = 0;
         }
 
         return counter;
@@ -99,11 +105,12 @@ public class LuckyTicket {
         int sumOfEven = 0;
         int sumOfOdd = 0;
         for (int i = Integer.parseInt(min); i <= Integer.parseInt(max); i++) {
+            sumOfEven = sumOfOdd = 0;
             ticketNumber.append(i);
-            while (ticketNumber.length() < 6) {
+            while (ticketNumber.length() < LENGTH_OF_NUMBER) {
                 ticketNumber.insert(0, 0);
             }
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < LENGTH_OF_NUMBER; j++) {
                 if (Integer.parseInt(ticketNumber.charAt(j) + "") % 2 == 0) {
                     sumOfEven += Integer.parseInt(ticketNumber.charAt(j) + "");
                 } else {
@@ -114,43 +121,8 @@ public class LuckyTicket {
                 counter++;
             }
             ticketNumber.delete(0, 6);
-            sumOfEven = sumOfOdd = 0;
         }
         return counter;
     }
 
-    /**
-     * Method to test class.
-     *
-     * @param args Command-line arguments.
-     */
-    public static void main(String[] args) {
-
-        if (args.length == 0) {
-            info();
-        } else if (args.length != 2) {
-            throw new IllegalArgumentException("You should have entered exactly two arguments.");
-        } else {
-            try {
-                System.out.println(LuckyTicket.numberOfTickets(args[0], args[1]));
-            } catch (IllegalArgumentException | NullPointerException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-    }
-
-    /**
-     * Method, which displays the rules of using this program, if there are no arguments passed from
-     * the command-line.
-     */
-    public static void info() {
-        System.out.println(
-                "\tThis program counts lucky tickets within numerical limits defined by user.\n"
-                        + "It counts using two methods at a time: simple and complex.\n"
-                        + "At the and of the program it will show you two numbers of lucky tickets counted \n"
-                        + "with two methods and define which method will count more tickets than another within \n"
-                        + "a specific limit of numbers defined by users in command-line arguments. User have to enter\n "
-                        + "two valid numbers numbers in a following way: 000001, 101010, 242156 etc.\n");
-    }
 }

@@ -1,9 +1,5 @@
 package chess;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * <h1>Chess board.</h1>
  *
@@ -17,12 +13,18 @@ public class ChessBoard {
     /**
      * Height of a chess field.
      */
-    private int height;
+    private final int height;
 
     /**
      * Width of a chess field.
      */
-    private int width;
+    private final int width;
+
+    /**
+     * Look of the board itself
+     */
+    private final StringBuilder boardRepresentation;
+
 
     /**
      * Constructor for creating specific chess board with user-defined size.
@@ -33,6 +35,14 @@ public class ChessBoard {
     private ChessBoard(int height, int width) {
         this.height = height;
         this.width = width;
+        boardRepresentation = paintBoard();
+    }
+
+    /**
+     * @return String representation of the board.
+     */
+    public String getBoardRepresentation() {
+        return boardRepresentation.toString();
     }
 
     /**
@@ -42,7 +52,7 @@ public class ChessBoard {
      * @param height count of board cells in a column.
      * @param width  count of board cells in a row.
      */
-    public static ChessBoard chessBoardBuilder(int height, int width)
+    public static ChessBoard chessBoardCreator(int height, int width)
             throws IllegalArgumentException {
         if (height > 0 && width > 0) {
             return new ChessBoard(height, width);
@@ -52,62 +62,32 @@ public class ChessBoard {
     }
 
     /**
-     * Method, which displays the rules of using this program, if there are no arguments passed from
-     * the command-line.
+     * This method creates chess board representation.
+     *
+     * @return Returns chess board representation
      */
-    public static void info() {
-        System.out.println(
-                "This program displays a chess board with custom size.\n"
-                        + " You should enter two arguments in numerical representation:\n"
-                        + " height and width of the board respectively\n"
-                        + "Arguments must be more than 0 or chess board won't be created and exception will be thrown\n");
-    }
-
-    /**
-     * This method displays chess board itself.
-     */
-    public void display() {
+    private StringBuilder paintBoard() {
+        StringBuilder board = new StringBuilder();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (i % 2 == 0) {
-                    System.out.print("* ");
+                    if (j % 2 == 0) {
+                        board.append("*");
+                    } else {
+                        board.append(" ");
+                    }
                 } else {
-                    System.out.print(" *");
+                    if (j % 2 != 0) {
+                        board.append("*");
+                    } else {
+                        board.append(" ");
+                    }
                 }
             }
-            System.out.println();
+            board.append("\n");
         }
+        return board;
     }
 
-    /**
-     * Method to test class.
-     *
-     * @param args Command-line arguments.
-     */
-    public static void main(String[] args) {
 
-        try {
-            Pattern pattern = Pattern.compile("^[+-]?\\d+");
-
-            if (args.length == 0) {
-                info();
-            } else if (args.length != 2) {
-                System.out.println("There must be exactly two arguments");
-            } else if (pattern.matcher(args[0]).matches() && pattern.matcher(args[1]).matches()) {
-                ChessBoard chessBoard =
-                        ChessBoard.chessBoardBuilder(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-                chessBoard.display();
-            } else {
-                System.out.println(
-                        "Arguments must be integer numbers (Remember, that chess board doesn't have a zero or negative "
-                                + "height or width, though, you are allowed to enter only positive whole numbers)\n");
-            }
-        } catch (NumberFormatException nfe) {
-            System.out.println("Number is too big or too small");
-        } catch (IllegalArgumentException iae) {
-            System.out.println(iae.getMessage());
-        } catch (Exception e) {
-            System.out.println("Something went wrong");
-        }
-    }
 }
