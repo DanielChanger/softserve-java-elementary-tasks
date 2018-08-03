@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Collection;
+
 /**
  * <h1>Chess board.</h1>
  *
@@ -74,8 +76,12 @@ public class ChessBoard {
                     if (j % 2 == 0) {
                         board.append("*");
                     } else {
+                        if(j == width - 1) {
+                            break;
+                        }
                         board.append(" ");
                     }
+
                 } else {
                     if (j % 2 != 0) {
                         board.append("*");
@@ -84,7 +90,9 @@ public class ChessBoard {
                     }
                 }
             }
-            board.append("\n");
+            if(i != height - 1){
+                board.append("\n");
+            }
         }
         return board;
     }
