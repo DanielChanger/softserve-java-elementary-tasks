@@ -1,5 +1,6 @@
 package ticket;
 
+import org.junit.jupiter.api.DisplayName;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -36,6 +37,18 @@ public class LuckyTicketTest {
         };
     }
 
+    @DataProvider(name = "valid numbers for checking correctness of calculating")
+    public static Object[][] getValidNumbersForCalcCheck() {
+        return new Object[][]{
+                {"000001", "999999"},
+                {"000001", "467545"},
+                {"000010", "847535"},
+                {"043164", "146724"},
+                {"000001", "000001"},
+                {"124663", "136713"},
+        };
+    }
+
 
     @Test(dataProvider = "invalid numbers", expectedExceptions = {IllegalArgumentException.class, NullPointerException.class})
     public void testNumberOfTicketsWithInvalidValues(String numberMinimum, String numberMaximum) {
@@ -44,7 +57,8 @@ public class LuckyTicketTest {
 
 
     @Test(dataProvider = "valid numbers")
-    public void testNumberOfTicketsWithValidValues(String numberMinimum, String numberMaximum) {
+    @DisplayName("")
+    public void testNumberOfTicketsWithValidValuesForExceptions(String numberMinimum, String numberMaximum) {
         Exception ex = null;
         try {
             LuckyTicket.numberOfTickets(numberMinimum, numberMaximum);
@@ -54,4 +68,8 @@ public class LuckyTicketTest {
         assertNull(ex);
     }
 
+    @Test(dataProvider = "valid numbers for checking correctness of calculating")
+    public void testNumberOfTicketsWithValidValuesForCorrectCalculating(String numberMinimum, String numberMaximum) {
+
+    }
 }

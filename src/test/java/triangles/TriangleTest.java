@@ -1,20 +1,18 @@
 package triangles;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assertions.*;
+import static triangles.Triangle.triangleBuilder;
 class TriangleTest {
 
-
-    static Stream<Arguments> invalidArgsForCreatorProvider() {
+    private static Stream<Arguments> invalidArgsForCreator() {
         return Stream.of(
-                Arguments.of("", 2, 2, 3),
                 Arguments.of(null, 2, 3, 5),
                 Arguments.of("A", 0, 0, 0),
                 Arguments.of("B", 0, 3, 5),
@@ -30,12 +28,42 @@ class TriangleTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("invalidArgsForCreatorProvider")
-    void testTriangleBuilder(String name, double sideA, double sideB, double sideC) {
+    private static Stream<Arguments> validArgsForInitAreaTest() {
+        return Stream.of(
+                Arguments.of(triangleBuilder("A", 3, 3, 4.7), 4.382),
+                Arguments.of(triangleBuilder("B", 5, 4, 3), 6),
+                Arguments.of(triangleBuilder("C", 8, 5, 5), 12),
+                Arguments.of(triangleBuilder("D", 12, 12, 12), 62.353),
+                Arguments.of(triangleBuilder("E", 37, 30, 13), 180),
+                Arguments.of(triangleBuilder("F", 20, 13, 11), 66),
+                Arguments.of(triangleBuilder("G", 17, 10, 9), 36),
+                Arguments.of(triangleBuilder("H", 4, 12, 10), 18.734),
+                Arguments.of(triangleBuilder("I", 1, 2, 2.5), 0.95)
+        );
+    }
 
+    private static Stream<Arguments> validArgsForToStringTest() {
+        return Stream.of(
+                Arguments.of(triangleBuilder("A", 3, 3, 4.7), "[Triangle A]: 4.382 cm"),
+                Arguments.of(triangleBuilder("B", 5, 4, 3), "[Triangle B]: 6 cm"),
+                Arguments.of(triangleBuilder("C", 8, 5, 5), "[Triangle C]: 12 cm"),
+                Arguments.of(triangleBuilder("D", 12, 12, 12), "[Triangle D]: 62.354 cm"),
+                Arguments.of(triangleBuilder("E", 37, 30, 13), "[Triangle E]: 180 cm"),
+                Arguments.of(triangleBuilder("F", 20, 13, 11), "[Triangle F]: 66 cm"),
+                Arguments.of(triangleBuilder("G", 17, 10, 9), "[Triangle G]: 36 cm"),
+                Arguments.of(triangleBuilder("H", 4, 12, 10), "[Triangle H]: 18.735 cm"),
+                Arguments.of(triangleBuilder("I", 1, 2, 2.5), "[Triangle I]: 0.95 cm")
+        );
+    }
+
+
+
+    @ParameterizedTest
+    @DisplayName("Checks if triangle builder will throw and exception due to illegal parameters")
+    @MethodSource("invalidArgsForCreator")
+    void testTriangleBuilder(String name, double sideA, double sideB, double sideC) {
         assertThrows(IllegalArgumentException.class, () -> {
-            Triangle.triangleBuilder(name, sideA, sideB, sideC);
+            triangleBuilder(name, sideA, sideB, sideC);
         });
     }
 
@@ -44,11 +72,22 @@ class TriangleTest {
     but we still need to know the results it calculates, so we examine the
     results that are returned by method getArea
     */
-    @Test
-    void testGetArea() {
+    @ParameterizedTest
+    @DisplayName("Checks if initArea method correctly calculates triangle area")
+    @MethodSource("validArgsForInitAreaTest")
+    void testGetArea(Triangle triangle, double expected) {
+        double actual = triangle.getArea();
+        double precision = 0.001;
+        if (Math.abs(expected - actual) >= precision) {
+            fail("Expected(" + expected + ") area differs from actual(" + actual + ")");
+        }
     }
 
-    @Test
-    void testToString() {
+    @ParameterizedTest
+    @DisplayName("Checks if toString method correctly outputs triangle with the defined format")
+    @MethodSource("validArgsForToStringTest")
+    void testToString(Triangle triangle, String expected) {
+        String actual = triangle.toString();
+        assertEquals(expected, actual);
     }
 }

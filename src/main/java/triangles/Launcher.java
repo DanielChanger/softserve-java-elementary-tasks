@@ -4,6 +4,11 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Launcher {
+
+    public static void info() {
+        System.out.println("");
+    }
+
     public static void main(String[] args) {
         LinkedList<Triangle> triangles = new LinkedList<>();
         Scanner scanner;

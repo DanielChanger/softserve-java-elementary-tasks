@@ -1,5 +1,7 @@
 package triangles;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -42,7 +44,11 @@ public class Triangle {
 
     @Override
     public String toString() {
-        return String.format(Locale.US, "[Triangle %s]: %.2f cm", name, area);
+        DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        df.setMinimumFractionDigits(0);
+        df.setMaximumFractionDigits(3);
+//        String areaToString = Double.toString(area).replaceFirst("[.]0$", "");
+        return String.format("[Triangle %s]: " + df.format(area) + " cm", name);
     }
 
 
