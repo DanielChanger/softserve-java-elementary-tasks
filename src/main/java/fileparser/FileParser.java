@@ -28,7 +28,7 @@ public class FileParser {
         return counterOfWord;
     }
 
-    void replaceWord(String stringToSearch, String stringToReplaceWith) throws IOException {
+    void replaceString(String stringToSearch, String stringToReplaceWith) throws IOException {
         String text = getFileText().replaceAll(stringToSearch, stringToReplaceWith);
         writeToFile(text);
     }

@@ -22,7 +22,7 @@ public class Launcher {
             } else if (args.length == 3) {
                 FileParser fileParser;
                 fileParser = FileParser.fileParserCreator(Paths.get(args[0]));
-                fileParser.replaceWord(args[1], args[2]);
+                fileParser.replaceString(args[1], args[2]);
                 System.out.println(fileParser.getFileText());
             } else {
                 System.out.println(

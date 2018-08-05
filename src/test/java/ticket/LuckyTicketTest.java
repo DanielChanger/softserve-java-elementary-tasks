@@ -41,8 +41,8 @@ public class LuckyTicketTest {
     public static Object[][] getValidNumbersForCalcCheck() {
         return new Object[][]{
                 {"000001", "999999"},
-                {"000001", "467545"},
-                {"000010", "847535"},
+                {"000000", "000005"},
+                {"000100", "000105"},
                 {"043164", "146724"},
                 {"000001", "000001"},
                 {"124663", "136713"},

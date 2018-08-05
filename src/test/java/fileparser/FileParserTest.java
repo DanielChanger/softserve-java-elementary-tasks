@@ -1,5 +1,6 @@
 package fileparser;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileParserTest {
 
+    String text;
 
     private static Object[][] getInvalidPaths() {
         return new Object[][]{
@@ -71,10 +73,36 @@ class FileParserTest {
         assertEquals(expected, actual);
     }
 
+
     @Test
-    void testReplaceWord() throws IOException {
-        System.out.println(Integer.parseInt("-1"));
+    void testReplaceString_Text_With_Sentence() throws IOException {
+        FileParser fileParser = FileParser.fileParserCreator(Paths.get("src\\test\\resources\\testFile3.txt"));
+        String expected = "In literary theory, a sentence is any object that can be \"read\", whether this object is a work\n" +
+                "of literature, a street sign, an arrangement of buildings on a city block, or styles of clothing.\n" +
+                "It is a coherent set of signs that transmits some kind of informative message.\n" +
+                "This set of symbols is considered in terms of the informative message's content,\n" +
+                "rather than in terms of its physical form or the medium in which it is represented.\n" +
+                "\n" +
+                "Within the field of literary criticism, \"sentence\" also refers to the original information content\n" +
+                "of a particular piece of writing; that is, the \"sentence\" of a work is that primal symbolic arrangement\n" +
+                "of letters as originally composed, apart from later alterations, deterioration, commentary, translations,\n" +
+                "parasentence, etc. Therefore, when literary criticism is concerned with the determination of a \"sentence\",\n" +
+                "it is concerned with the distinguishing of the original information content from whatever has been added to\n" +
+                "or subtracted from that content as it appears in a given sentenceual document (that is, a physical representation of sentence).\n" +
+                "\n" +
+                "Since the history of writing predates the concept of the \"sentence\", most sentences were not written with this\n" +
+                "concept in mind. Most written works fall within a narrow range of the types described by sentence theory.\n" +
+                "The concept of \"sentence\" becomes relevant if and when a \"coherent written message is completed and needs\n" +
+                "to be referred to independently of the circumstances in which it was created.\"\n";
+
+        fileParser.replaceString("text", "sentence");
+        String actual = fileParser.getFileText();
+        assertEquals(actual, expected);
     }
 
-
+    @AfterAll
+    static void tearDown() throws IOException {
+        FileParser fileParser = FileParser.fileParserCreator(Paths.get("src\\test\\resources\\testFile3.txt"));
+        fileParser.replaceString("sentence", "text");
+    }
 }
