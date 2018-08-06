@@ -29,7 +29,6 @@ public class LuckyTicket {
      * complexMethod will not launch)
      */
     public static String numberOfTickets(String min, String max) throws IllegalArgumentException, NullPointerException {
-
         validateParams(min, max);
         int counterSimple = simpleMethod(min, max);
         int counterComplex = complexMethod(min, max);

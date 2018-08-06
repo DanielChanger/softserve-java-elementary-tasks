@@ -3,8 +3,11 @@ package numbersequence;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static numbersequence.NumberSequence.numberSequenceCreator;
-import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
+
 public class NumberSequenceTest {
 
 
@@ -45,6 +48,6 @@ public class NumberSequenceTest {
     public void testGetSequence(int length, double minSquare, int[] expected) {
         NumberSequence numberSequence = NumberSequence.numberSequenceCreator(length, minSquare);
         int[] actual = numberSequence.getSequence();
-        assertEquals(actual, expected);
+        assertTrue(Arrays.equals(expected, actual));
     }
 }

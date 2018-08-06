@@ -1,9 +1,5 @@
-package classtasks;
+package classtasks.strings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringTasks {

@@ -1,4 +1,4 @@
-package classtasks;
+package classtasks.arrays;
 
 public class SnailArray {
 

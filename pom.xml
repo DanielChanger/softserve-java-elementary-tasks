@@ -7,7 +7,9 @@
 
     <groupId>groupId</groupId>
     <artifactId>softserve-java-elementary-tasks</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <dependencies>
 
         <dependency>
