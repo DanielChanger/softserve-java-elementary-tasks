@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Launcher {
 
     public static void info() {
-        System.out.println("");
+        System.out.println("info");
     }
 
     public static void main(String[] args) {
@@ -21,8 +21,7 @@ public class Launcher {
 
                 scanner = new Scanner(System.in);
                 String[] triangleInput = scanner.nextLine().split(",");
-
-
+                
                 triangles.add(
                         Triangle.triangleBuilder(
                                 triangleInput[0].trim(),

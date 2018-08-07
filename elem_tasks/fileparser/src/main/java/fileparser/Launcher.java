@@ -5,7 +5,12 @@ import java.nio.file.Paths;
 
 public class Launcher {
     public static void info() {
-        System.out.println();
+        System.out.println("This program checks how many occurrences of string in a file\n" +
+            "or changes all user-defined strings to others. Application takes 0, 2 or 3 arguments. If there were 0 of" +
+            "arguments passed, then outputs \"how-to\" information. If 2 args were passed, then the 1st arg is considered\n" +
+            "being a file path and the 2nd is a string, which occurrences are going to be counted. Else, if user passes 3\n" +
+            "args, then it will be considered to suit to the following scheme:\n" +
+            "<file path>, <string to replace>, <string to replace with>.");
     }
 
     public static void main(String[] args) {

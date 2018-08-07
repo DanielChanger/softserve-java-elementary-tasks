@@ -4,7 +4,9 @@ import java.util.Arrays;
 
 public class Launcher {
     public static void info() {
-        System.out.println();
+        System.out.println("Program outputs a sequence (with pre-defined by user length) of natural numbers,\n" +
+            "which square is not less than a user-defined number. Application takes 2 args: length of sequence and\n" +
+            "a number. Length cannot be <= 0, though, number is allowed to be any kind\n");
     }
 
     public static void main(String[] args) {

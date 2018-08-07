@@ -43,7 +43,7 @@ public class LuckyTicket {
                     + " vs Simple: "
                     + counterSimple;
         } else {
-            return "Simple and complex methods counted equivalent number of lucky tickets";
+            return "Simple and complex methods counted equivalent number of lucky tickets: " + counterSimple + " tickets";
         }
     }
 

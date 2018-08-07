@@ -3,7 +3,7 @@ package chess;
 /**
  * <h1>Chess board.</h1>
  *
- * <p>This app is simply displays chess board with user-defined size.
+ * <p>This app simply displays chess board with user-defined size.
  *
  * @author Daniel Changer.
  * @version 1.1.

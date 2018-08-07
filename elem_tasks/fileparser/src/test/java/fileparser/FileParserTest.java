@@ -14,6 +14,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class FileParserTest {
 
+
+    /**
+     * Provider of invalid paths to check if fileParserCreator throws exceptions.
+     *
+     * @return invalid paths.
+     */
     private static Object[][] getInvalidPaths() {
         return new Object[][] {
             {"asdgas", IOException.class},
@@ -27,6 +33,10 @@ class FileParserTest {
     }
 
 
+    /**
+     * Provider of valid strings to check if fileParserCreator throws exceptions.
+     * @return invalid paths.
+     */
     private static Object[][] getStringsToSearch() {
         return new Object[][] {
             {" был ", 2},
