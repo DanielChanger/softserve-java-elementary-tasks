@@ -6,7 +6,13 @@ import java.util.Scanner;
 public class Launcher {
 
     public static void info() {
-        System.out.println("info");
+        System.out.println("This program outputs triangles in a descend order by their area.\n" +
+            "It asks user to input triangle attributes in following format\n" +
+            "<name>, <sideA>, <sideB>, <sideC> separated with comma. After completing of entering\n" +
+            "attributes of a triangle program asks user if he wants to continue adding triangles.\n" +
+            "If he enters \"y\" or \"yes\" (input is case insensitive) then he is allowed to enter\n" +
+            "attributes for next triangle. Else, adding ends up and programm outputs those triangles\n" +
+            "in a descend order.");
     }
 
     public static void main(String[] args) {
@@ -21,7 +27,10 @@ public class Launcher {
 
                 scanner = new Scanner(System.in);
                 String[] triangleInput = scanner.nextLine().split(",");
-                
+                if (triangleInput[0].isEmpty()) {
+                    info();
+                }
+
                 triangles.add(
                         Triangle.triangleBuilder(
                                 triangleInput[0].trim(),

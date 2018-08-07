@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 public class Launcher {
     public static void info() {
-        System.out.println("");
+        System.out.println("This program outputs fibonacci numbers. If user inputs 1 argument,\n" +
+            "then it will be considered as a length of numbers, that program have to output. If 2 args were passed,\n" +
+            "then they are considered as range (for instance, from 0 to 1000, both inclusively) and program ought to\n" +
+            "output fibonacci numbers within it.");
     }
 
     public static void main(String[] args) {

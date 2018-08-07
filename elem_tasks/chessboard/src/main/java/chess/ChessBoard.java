@@ -62,7 +62,8 @@ public class ChessBoard {
     }
 
     /**
-     * This method creates chess board representation only one time after creating chess board instance.
+     * This method creates chess board representation only one time
+     * after creating chess board instance.
      *
      * @return Returns chess board representation
      */
