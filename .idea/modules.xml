@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/chessboard/chessboard.iml" filepath="$PROJECT_DIR$/elem_tasks/chessboard/chessboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/elem_tasks.iml" filepath="$PROJECT_DIR$/elem_tasks/elem_tasks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/envelopes/envelopes.iml" filepath="$PROJECT_DIR$/elem_tasks/envelopes/envelopes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/fibonacci/fibonacci.iml" filepath="$PROJECT_DIR$/elem_tasks/fibonacci/fibonacci.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/fileparser/fileparser.iml" filepath="$PROJECT_DIR$/elem_tasks/fileparser/fileparser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/luckyticket/luckyticket.iml" filepath="$PROJECT_DIR$/elem_tasks/luckyticket/luckyticket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/numbersequence/numbersequence.iml" filepath="$PROJECT_DIR$/elem_tasks/numbersequence/numbersequence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/numbertostring/numbertostring.iml" filepath="$PROJECT_DIR$/elem_tasks/numbertostring/numbertostring.iml" />
       <module fileurl="file://$PROJECT_DIR$/softserve-java-elementary-tasks.iml" filepath="$PROJECT_DIR$/softserve-java-elementary-tasks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elem_tasks/triangles/triangles.iml" filepath="$PROJECT_DIR$/elem_tasks/triangles/triangles.iml" />
     </modules>
   </component>
 </project>

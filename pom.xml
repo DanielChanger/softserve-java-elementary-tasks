@@ -9,6 +9,10 @@
     <artifactId>softserve-java-elementary-tasks</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>classtasks</module>
+        <module>elem_tasks</module>
+    </modules>
 
     <dependencies>
 
