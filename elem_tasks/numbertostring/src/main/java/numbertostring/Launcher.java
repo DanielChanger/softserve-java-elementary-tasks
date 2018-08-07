@@ -2,10 +2,13 @@ package numbertostring;
 
 public class Launcher {
 
+    /**
+     *
+     */
     public static void info() {
         System.out.println(
-                "This program takes a number in range of -+999,999,999,999, \n"
-                        + "then converts it to words and outputs it");
+            "This program takes a number in range of -+999,999,999,999, \n"
+                + "then converts it to words and outputs it");
     }
 
     public static void main(String[] args) {

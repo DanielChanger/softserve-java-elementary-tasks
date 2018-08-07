@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NumberToString {
-    private static final Map<Long, String> UNITS = new HashMap<Long, String>();
-    private static final Map<Long, String> TENS = new HashMap<Long, String>();
-    private static final Map<Long, String> HUNDREDS = new HashMap<Long, String>();
+    private static final Map<Long, String> UNITS = new HashMap<>();
+    private static final Map<Long, String> TENS = new HashMap<>();
+    private static final Map<Long, String> HUNDREDS = new HashMap<>();
 
     static {
         UNITS.put(0L, "ноль");

@@ -1,6 +1,5 @@
 package fileparser;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,13 +19,13 @@ public class FileParser {
 
     int repeatsOfString(String stringToSearch) throws IOException {
         String text = getFileText();
-        int counterOfWord = 0;
+        int counterOfString = 0;
         Pattern pattern = Pattern.compile(stringToSearch);
         Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
-            counterOfWord++;
+            counterOfString++;
         }
-        return counterOfWord;
+        return counterOfString;
     }
 
     void replaceString(String stringToSearch, String stringToReplaceWith) throws IOException {
@@ -52,7 +51,7 @@ public class FileParser {
     }
 
     private void writeToFile(String text) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile()));
+        FileWriter writer = new FileWriter(path.toFile());
         writer.write(text);
         writer.flush();
         writer.close();
