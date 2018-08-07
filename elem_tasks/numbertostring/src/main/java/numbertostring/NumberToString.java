@@ -3,7 +3,27 @@ package numbertostring;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * <h1>Number converter</h1>
+ *
+ * <p>Converts a number from -999 999 999 999 to +999 999 999 999 to its string representation.</p>
+ *
+ * @author Daniel Changer.
+ * @version 1.1.
+ */
 public class NumberToString {
+
+    //Constants for common use
+    private static final long TEN = 10;
+    private static final long TWENTY = 20;
+    private static final long ONE_HUNDRED = 100;
+    private static final long ONE_THOUSAND = 1_000;
+    private static final long ONE_MILLION = 1_000_000;
+    private static final long ONE_BILLION = 1_000_000_000;
+    private static final long ONE_TRILLION = 1_000_000_000_000L;
+
+    //Maps of unique numbers
     private static final Map<Long, String> UNITS = new HashMap<>();
     private static final Map<Long, String> TENS = new HashMap<>();
     private static final Map<Long, String> HUNDREDS = new HashMap<>();
@@ -50,80 +70,146 @@ public class NumberToString {
         HUNDREDS.put(9L, "девятьсот");
     }
 
-    private static String correctEndingForThousands(String str) {
+
+    /**
+     * Method takes a number to be converted and compares it
+     * with constant values to define.
+     *
+     * @param number number to be represented as a string
+     * @return converted string number
+     */
+    public static String convert(long number) {
+        String result;
+        if (number < 0) {
+            result = "минус " + convert(Math.abs(number));
+
+        } else if (number < TWENTY) {
+            result = UNITS.get(number);
+
+        } else if (number < ONE_HUNDRED) {
+            //divide by 10 to get number decades
+            result = (TENS.get(number / TEN)
+                //if number ends with zero - doesn't output it
+                //else outputs units
+                + (number % TEN > 0 ? " "
+                + convert(number % TEN) : ""));
+
+        } else if (number < ONE_THOUSAND) {
+            //divide by 100 to get number hundreds
+            result = (HUNDREDS.get(number / ONE_HUNDRED)
+                //if number ends with zeroes - doesn't output 'em
+                //else outputs decades and units
+                + (number % ONE_HUNDRED > 0 ? " "
+                + convert(number % ONE_HUNDRED) : ""));
+
+        } else if (number < ONE_MILLION) {
+            //divide by 1000 to get number thousands
+            result = getEndingForThousands(convert((number / ONE_THOUSAND)))
+                //if number ends with zeros - doesn't output 'em
+                + (number % ONE_THOUSAND > 0 ? " "
+                + convert(number % ONE_THOUSAND) : "");
+
+        } else if (number < ONE_BILLION) {
+            //divide by million to get number millions
+            result = getEndingForMillions(convert((number / ONE_MILLION)))
+                + " "
+                //divide by million and then divide by thousand to get number thousands
+                + getEndingForThousands(convert(((number % ONE_MILLION) / ONE_THOUSAND)))
+
+                + (number % ONE_THOUSAND > 0 ? " "
+                + convert(number % ONE_THOUSAND) : "");
+
+        } else if (number < ONE_TRILLION) {
+            //divide by billion to get number billions
+            result = getEndingForBillions(convert((number / ONE_BILLION)))
+                + " "
+                //divide by billion and then divide by million to get number millions
+                + getEndingForMillions(convert((number % ONE_BILLION) / ONE_MILLION))
+                + " "
+                //divide by billion, then by million and then divide by thousand to get number thousands
+                + getEndingForThousands(convert(((number % ONE_BILLION) % ONE_MILLION) / ONE_THOUSAND))
+                //if number ends with zeros - doesn't output 'em
+                //else outputs hundreds and decades and units
+                + (number % ONE_THOUSAND > 0 ? " "
+                + convert(number % ONE_THOUSAND) : "");
+
+        } else {
+            return "This number is not supported";
+        }
+
+        return result.replaceAll(" {2,}", " "); // to avoid double whitespaces
+    }
+
+
+    /**
+     * Method take string representation of a number of thousands
+     * and depending on what is the ending of a parameter value
+     * it decides what to append to make output correct
+     *
+     * @param str String representation of number of thousands
+     * @return correct string interpretation of thousands
+     */
+    private static String getEndingForThousands(String str) {
         if (str.equals("ноль")) {
             return "";
-        }
-        if (str.endsWith("один")) {
+        } else if (str.endsWith("один")) {
             return str.replace("один", "одна тысяча");
-        }
-        if (str.endsWith("два")) {
+
+        } else if (str.endsWith("два")) {
             return str.replace("два", "две тысячи");
-        }
-        if (str.endsWith("три") || str.endsWith("четыре")) {
+
+        } else if (str.endsWith("три") || str.endsWith("четыре")) {
             return str + " тысячи";
+
+        } else {
+            return str + " тысяч";
         }
-        return str + " тысяч";
     }
 
-    private static String correctEndingForMillions(String str) {
+
+    /**
+     * Method take string representation of a number of millions
+     * and depending on what is the ending of a parameter value
+     * it decides what to append to make correct output
+     *
+     * @param str String representation of number of millions
+     * @return correct string interpretation of millions
+     */
+    private static String getEndingForMillions(String str) {
         if (str.equals("ноль")) {
             return "";
-        }
-        if (str.endsWith("один")) {
+
+        } else if (str.endsWith("один")) {
             return str + " миллион";
-        }
-        if (str.endsWith("два") || str.endsWith("три") || str.endsWith("четыре")) {
+
+        } else if (str.endsWith("два") || str.endsWith("три") || str.endsWith("четыре")) {
             return str + " миллиона";
+
+        } else {
+            return str + " миллионов";
         }
-        return str + " миллионов";
     }
 
-    private static String correctEndingForBillions(String str) {
+    /**
+     * Method take string representation of a number of billions
+     * and depending on what is the ending of a parameter value
+     * it decides what to append to make output correct
+     *
+     * @param str String representation of number of billions
+     * @return correct string interpretation of billions
+     */
+    private static String getEndingForBillions(String str) {
         if (str.equals("ноль")) {
             return "";
-        }
-        if (str.endsWith("один")) {
-            return str + " миллиард";
-        }
-        if (str.endsWith("два") || str.endsWith("три") || str.endsWith("четыре")) {
-            return str + " миллиарда";
-        }
-        return str + " миллиардов";
-    }
 
-    public static String convert(long i) {
-        if (i < 0) {
-            return "минус " + convert(Math.abs(i));
+        } else if (str.endsWith("один")) {
+            return str + " миллиард";
+
+        } else if (str.endsWith("два") || str.endsWith("три") || str.endsWith("четыре")) {
+            return str + " миллиарда";
+
+        } else {
+            return str + " миллиардов";
         }
-        if (i < 20) {
-            return UNITS.get(i);
-        }
-        if (i < 100) {
-            return (TENS.get(i / 10) + ((i % 10 > 0) ? " " + convert(i % 10) : "")).replaceAll(" {2,}", " ");
-        }
-        if (i < 1000) {
-            return (HUNDREDS.get(i / 100) + ((i % 100 > 0) ? " " + convert(i % 100) : "")).replaceAll(" {2,}", " ");
-        }
-        if (i < 1_000_000) {
-            return (correctEndingForThousands(convert((i / 1000)))
-                    + ((i % 1000 > 0) ? " " + convert(i % 1000) : "")).replaceAll(" {2,}", " ");
-        }
-        if (i < 1_000_000_000) {
-            return (correctEndingForMillions(convert((i / 1_000_000)))
-                    + " "
-                    + correctEndingForThousands(convert(((i % 1_000_000) / 1000)))
-                    + ((i % 1000 > 0) ? " " + convert(i % 1000) : "")).replaceAll(" {2,}", " ");
-        }
-        if (i < 1_000_000_000_000L) {
-            return (correctEndingForBillions(convert((i / 1_000_000_000)))
-                    + " "
-                    + correctEndingForMillions(convert((i % 1_000_000_000) / 1_000_000))
-                    + " "
-                    + correctEndingForThousands(convert(((i % 1_000_000_000) % 1_000_000) / 1000))
-                    + ((i % 1000 > 0) ? " " + convert(i % 1000) : ""))
-                    .replaceAll(" {2,}", " ");
-        }
-        return "This number is not supported";
     }
 }

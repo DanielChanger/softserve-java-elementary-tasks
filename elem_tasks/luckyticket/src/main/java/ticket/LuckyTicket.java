@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class LuckyTicket {
 
-    private final static int LENGTH_OF_NUMBER = 6;
+    private static final int LENGTH_OF_NUMBER = 6;
 
 
     /**
@@ -34,14 +34,14 @@ public class LuckyTicket {
         int counterComplex = complexMethod(min, max);
         if (counterSimple > counterComplex) {
             return "Simple method counted more lucky tickets than a complex one — Simple: "
-                    + counterSimple
-                    + " vs Complex: "
-                    + counterComplex;
+                + counterSimple
+                + " vs Complex: "
+                + counterComplex;
         } else if (counterSimple < counterComplex) {
             return "Complex method counted more lucky tickets than a simple one — Complex: "
-                    + counterComplex
-                    + " vs Simple: "
-                    + counterSimple;
+                + counterComplex
+                + " vs Simple: "
+                + counterSimple;
         } else {
             return "Simple and complex methods counted equivalent number of lucky tickets: " + counterSimple + " tickets";
         }
@@ -52,7 +52,7 @@ public class LuckyTicket {
 
         if (!pattern.matcher(min).matches() || !pattern.matcher(max).matches()) {
             throw new IllegalArgumentException("One or both parameters are incorrect. \n"
-                    + "You should enter two numbers in a following + way: 000001, 101010, 242156 etc.");
+                + "You should enter two numbers in a following + way: 000001, 101010, 242156 etc.");
         }
         if (Integer.parseInt(min) > Integer.parseInt(max)) {
             throw new IllegalArgumentException("Minimum value cannot be greater than maximum");

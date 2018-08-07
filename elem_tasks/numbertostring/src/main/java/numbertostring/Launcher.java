@@ -2,13 +2,21 @@ package numbertostring;
 
 public class Launcher {
 
-
+    /**
+     * Method, which displays the rules of using this program, if there are no arguments passed from
+     * the command-line.
+     */
     public static void info() {
         System.out.println(
             "This program takes a number in range of -+999,999,999,999, \n"
-                + "then converts it to words and outputs it.");
+                + "then converts it to words and outputs it");
     }
 
+    /**
+     * Method to launch app.
+     *
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         if (args.length == 0) {
             info();

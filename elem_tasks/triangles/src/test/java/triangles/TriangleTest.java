@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static triangles.Triangle.triangleBuilder;
+import static triangles.Triangle.createTriangle;
 class TriangleTest {
 
     private static Stream<Arguments> invalidArgsForCreator() {
@@ -30,29 +30,29 @@ class TriangleTest {
 
     private static Stream<Arguments> validArgsForInitAreaTest() {
         return Stream.of(
-                Arguments.of(triangleBuilder("A", 3, 3, 4.7), 4.382),
-                Arguments.of(triangleBuilder("B", 5, 4, 3), 6),
-                Arguments.of(triangleBuilder("C", 8, 5, 5), 12),
-                Arguments.of(triangleBuilder("D", 12, 12, 12), 62.353),
-                Arguments.of(triangleBuilder("E", 37, 30, 13), 180),
-                Arguments.of(triangleBuilder("F", 20, 13, 11), 66),
-                Arguments.of(triangleBuilder("G", 17, 10, 9), 36),
-                Arguments.of(triangleBuilder("H", 4, 12, 10), 18.734),
-                Arguments.of(triangleBuilder("I", 1, 2, 2.5), 0.95)
+            Arguments.of(createTriangle("A", 3, 3, 4.7), 4.382),
+            Arguments.of(createTriangle("B", 5, 4, 3), 6),
+            Arguments.of(createTriangle("C", 8, 5, 5), 12),
+            Arguments.of(createTriangle("D", 12, 12, 12), 62.353),
+            Arguments.of(createTriangle("E", 37, 30, 13), 180),
+            Arguments.of(createTriangle("F", 20, 13, 11), 66),
+            Arguments.of(createTriangle("G", 17, 10, 9), 36),
+            Arguments.of(createTriangle("H", 4, 12, 10), 18.734),
+            Arguments.of(createTriangle("I", 1, 2, 2.5), 0.95)
         );
     }
 
     private static Stream<Arguments> validArgsForToStringTest() {
         return Stream.of(
-                Arguments.of(triangleBuilder("A", 3, 3, 4.7), "[Triangle A]: 4.382 cm"),
-                Arguments.of(triangleBuilder("B", 5, 4, 3), "[Triangle B]: 6 cm"),
-                Arguments.of(triangleBuilder("C", 8, 5, 5), "[Triangle C]: 12 cm"),
-                Arguments.of(triangleBuilder("D", 12, 12, 12), "[Triangle D]: 62.354 cm"),
-                Arguments.of(triangleBuilder("E", 37, 30, 13), "[Triangle E]: 180 cm"),
-                Arguments.of(triangleBuilder("F", 20, 13, 11), "[Triangle F]: 66 cm"),
-                Arguments.of(triangleBuilder("G", 17, 10, 9), "[Triangle G]: 36 cm"),
-                Arguments.of(triangleBuilder("H", 4, 12, 10), "[Triangle H]: 18.735 cm"),
-                Arguments.of(triangleBuilder("I", 1, 2, 2.5), "[Triangle I]: 0.95 cm")
+            Arguments.of(createTriangle("A", 3, 3, 4.7), "[Triangle A]: 4.382 cm"),
+            Arguments.of(createTriangle("B", 5, 4, 3), "[Triangle B]: 6 cm"),
+            Arguments.of(createTriangle("C", 8, 5, 5), "[Triangle C]: 12 cm"),
+            Arguments.of(createTriangle("D", 12, 12, 12), "[Triangle D]: 62.354 cm"),
+            Arguments.of(createTriangle("E", 37, 30, 13), "[Triangle E]: 180 cm"),
+            Arguments.of(createTriangle("F", 20, 13, 11), "[Triangle F]: 66 cm"),
+            Arguments.of(createTriangle("G", 17, 10, 9), "[Triangle G]: 36 cm"),
+            Arguments.of(createTriangle("H", 4, 12, 10), "[Triangle H]: 18.735 cm"),
+            Arguments.of(createTriangle("I", 1, 2, 2.5), "[Triangle I]: 0.95 cm")
         );
     }
 
@@ -62,9 +62,7 @@ class TriangleTest {
     @DisplayName("Checks if triangle builder will throw and exception due to illegal parameters")
     @MethodSource("invalidArgsForCreator")
     void testTriangleBuilder(String name, double sideA, double sideB, double sideC) {
-        assertThrows(IllegalArgumentException.class, () -> {
-            triangleBuilder(name, sideA, sideB, sideC);
-        });
+        assertThrows(IllegalArgumentException.class, () -> createTriangle(name, sideA, sideB, sideC));
     }
 
     /*

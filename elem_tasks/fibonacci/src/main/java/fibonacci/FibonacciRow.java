@@ -4,6 +4,15 @@ import java.util.ArrayList;
 
 public class FibonacciRow {
 
+    /**
+     * Outputs fibonacci sequence with numbers, which length are defined
+     * with a parameter lengthOfNumber
+     *
+     * @param lengthOfNumber length of fibonacci number to be output
+     * @return fibonacci sequence
+     * @throws NumberFormatException throws if length is less than 0 and
+     *                               greater than 19 (system cannot handle greater numbers)
+     */
     public static ArrayList<Long> fibonacci(int lengthOfNumber) throws NumberFormatException {
         if (lengthOfNumber < 0) {
             throw new NumberFormatException("Length of number cannot be negative");
@@ -28,6 +37,15 @@ public class FibonacciRow {
         return row;
     }
 
+    /**
+     * Outputs fibonacci sequence with numbers within a range defined
+     * with parameters start and end
+     *
+     * @param start the lowest boundary of fibonacci sequence
+     * @param end   the highest boundary of fibonacci sequence
+     * @return fibonacci sequence
+     * @throws NumberFormatException
+     */
     public static ArrayList<Long> fibonacci(long start, long end) throws NumberFormatException {
         if (start < 0 || end < 0) {
             throw new NumberFormatException("This algorithm is only for positive set of numbers");

@@ -22,7 +22,7 @@ public class NumberSequence {
         initSequence();
     }
 
-    public static NumberSequence numberSequenceCreator(int length, double minimalSquare)
+    public static NumberSequence createNumberSequence(int length, double minimalSquare)
             throws IllegalArgumentException, OutOfMemoryError {
         if (length <= 0) {
             throw new IllegalArgumentException("Length cannot be negative or zero");

@@ -5,8 +5,12 @@ import java.util.Scanner;
 
 public class Launcher {
 
-    public static void info() {
-        System.out.println("This program outputs triangles in a descend order by their area.\n" +
+    /**
+     * Method, which displays the rules of using this program, if there are no arguments passed from
+     * the command-line.
+     */
+    public static void printInfo() {
+        System.out.println("\nThis program outputs triangles in a descend order by their area.\n" +
             "It asks user to input triangle attributes in following format\n" +
             "<name>, <sideA>, <sideB>, <sideC> separated with comma. After completing of entering\n" +
             "attributes of a triangle program asks user if he wants to continue adding triangles.\n" +
@@ -15,42 +19,42 @@ public class Launcher {
             "in a descend order.");
     }
 
+    /**
+     * Method to launch app.
+     *
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         LinkedList<Triangle> triangles = new LinkedList<>();
-        Scanner scanner;
-        try {
+        try (Scanner scanner = new Scanner(System.in);) {
             System.out.println(
-                    "\nEnter arguments in a following order: <name>, <sideA>, <sideB>, <sideC>"
-                            + "\n(don't forget to separate them with comma like: myName, 2, 3.9 , 4.0)\n");
+                "\nEnter arguments in a following order: <name>, <sideA>, <sideB>, <sideC>"
+                    + "\n(don't forget to separate them with comma like: myName, 2, 3.9 , 4.0)\n");
             do {
                 System.out.print("Enter new triangle attributes: ");
 
-                scanner = new Scanner(System.in);
+
                 String[] triangleInput = scanner.nextLine().split(",");
                 if (triangleInput[0].isEmpty()) {
-                    info();
+                    printInfo();
                 }
 
                 triangles.add(
-                        Triangle.triangleBuilder(
-                                triangleInput[0].trim(),
-                                Double.parseDouble(triangleInput[1]),
-                                Double.parseDouble(triangleInput[2]),
-                                Double.parseDouble(triangleInput[3])));
+                    Triangle.createTriangle(
+                        triangleInput[0].trim(),
+                        Double.parseDouble(triangleInput[1]),
+                        Double.parseDouble(triangleInput[2]),
+                        Double.parseDouble(triangleInput[3])));
 
 
                 System.out.println("Do you want to continue adding triangles");
-                scanner = new Scanner(System.in);
-
             } while (scanner.next().matches("(?i)(y|yes)"));
 
             Triangle.showTrianglesReversedList(triangles);
 
-            scanner.close();
-
         } catch (NumberFormatException e) {
             System.out.println(
-                    "Don't use any characters to input values of sideA, sideB, sideC. Only digits!");
+                "Don't use any characters to input values of sideA, sideB, sideC. Only digits!");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You need to separate every argument with comma");
         } catch (IllegalArgumentException e) {

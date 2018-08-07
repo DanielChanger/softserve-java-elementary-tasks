@@ -63,30 +63,25 @@ public class EnvelopeTest {
 
     @Test(dataProvider = "invalid args for envelope creator", expectedExceptions = IllegalArgumentException.class)
     public void testEnvelopeCreator(double verticalSide, double horizontalSide) {
-        Envelope.envelopeCreator(verticalSide, horizontalSide);
+        Envelope.createEnvelope(verticalSide, horizontalSide);
     }
 
     @Test(dataProvider = "valid args for isFitInto test")
-    public void testIsFitInto(double verticalSideA,
-                              double horizontalSideA,
-                              double verticalSideB,
-                              double horizontalSideB,
+    public void testIsFitInto(double verticalSideA, double horizontalSideA,
+                              double verticalSideB, double horizontalSideB,
                               boolean expected) {
-
-        Envelope A = Envelope.envelopeCreator(verticalSideA, horizontalSideA);
-        Envelope B = Envelope.envelopeCreator(verticalSideB, horizontalSideB);
+        Envelope A = Envelope.createEnvelope(verticalSideA, horizontalSideA);
+        Envelope B = Envelope.createEnvelope(verticalSideB, horizontalSideB);
         boolean actual = A.isFitInto(B);
         assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "valid args for compareTo test")
-    public void testCompareTo(double verticalSideA,
-                              double horizontalSideA,
-                              double verticalSideB,
-                              double horizontalSideB,
+    public void testCompareTo(double verticalSideA, double horizontalSideA,
+                              double verticalSideB, double horizontalSideB,
                               int expected) {
-        Envelope A = Envelope.envelopeCreator(verticalSideA, horizontalSideA);
-        Envelope B = Envelope.envelopeCreator(verticalSideB, horizontalSideB);
+        Envelope A = Envelope.createEnvelope(verticalSideA, horizontalSideA);
+        Envelope B = Envelope.createEnvelope(verticalSideB, horizontalSideB);
         int actual = A.compareTo(B);
         assertEquals(actual, expected);
     }

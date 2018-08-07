@@ -14,12 +14,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class FileParserTest {
 
-
-    /**
-     * Provider of invalid paths to check if fileParserCreator throws exceptions.
-     *
-     * @return invalid paths.
-     */
     private static Object[][] getInvalidPaths() {
         return new Object[][] {
             {"asdgas", IOException.class},
@@ -33,10 +27,6 @@ class FileParserTest {
     }
 
 
-    /**
-     * Provider of valid strings to check if fileParserCreator throws exceptions.
-     * @return invalid paths.
-     */
     private static Object[][] getStringsToSearch() {
         return new Object[][] {
             {" был ", 2},
@@ -55,7 +45,7 @@ class FileParserTest {
     void testFileParserCreator(String path, Class expected) {
         Exception exception = null;
         try {
-            FileParser.fileParserCreator(Paths.get(path));
+            FileParser.createFileParser(Paths.get(path));
         } catch (IOException | NullPointerException | InvalidPathException e) {
             exception = e;
         }
@@ -68,7 +58,7 @@ class FileParserTest {
 
     @Test
     void testGetFileTextFromTestFileTxt() throws IOException {
-        FileParser fileParser = FileParser.fileParserCreator(Paths.get("src\\test\\resources\\testFile2.txt"));
+        FileParser fileParser = FileParser.createFileParser(Paths.get("src\\test\\resources\\testFile2.txt"));
 
         String expected = "Запущенная в январе 2001 года Джимми Уэйлсом и Ларри Сэнгером,\n" +
             "Википедия сейчас является самым крупным и наиболее популярным\n" +
@@ -88,15 +78,15 @@ class FileParserTest {
     @ParameterizedTest
     @MethodSource("getStringsToSearch")
     void repeatsOfString(String stringToSearch, int expected) throws IOException {
-        FileParser fileParser = FileParser.fileParserCreator(Paths.get("src\\test\\resources\\testFile.txt"));
-        int actual = fileParser.repeatsOfString(stringToSearch);
+        FileParser fileParser = FileParser.createFileParser(Paths.get("src\\test\\resources\\testFile.txt"));
+        int actual = fileParser.getRepeatsOfString(stringToSearch);
         assertEquals(expected, actual);
     }
 
 
     @Test
     void testReplaceString_Text_With_Sentence() throws IOException {
-        FileParser fileParser = FileParser.fileParserCreator(Paths.get("src\\test\\resources\\testFile3.txt"));
+        FileParser fileParser = FileParser.createFileParser(Paths.get("src\\test\\resources\\testFile3.txt"));
         String expected = "In literary theory, a sentence is any object that can be \"read\", whether this object is a work\n" +
             "of literature, a street sign, an arrangement of buildings on a city block, or styles of clothing.\n" +
             "It is a coherent set of signs that transmits some kind of informative message.\n" +
@@ -122,7 +112,7 @@ class FileParserTest {
 
     @AfterAll
     static void tearDown() throws IOException {
-        FileParser fileParser = FileParser.fileParserCreator(Paths.get("src\\test\\resources\\testFile3.txt"));
+        FileParser fileParser = FileParser.createFileParser(Paths.get("src\\test\\resources\\testFile3.txt"));
         fileParser.replaceString("sentence", "text");
     }
 }

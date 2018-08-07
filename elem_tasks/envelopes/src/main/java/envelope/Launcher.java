@@ -1,5 +1,6 @@
 package envelope;
 
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -9,11 +10,13 @@ public class Launcher {
      * Method, which displays the rules of using this program, if there are no arguments passed from
      * the command-line.
      */
-    public static void info() {
+    public static void printInfo() {
         System.out.println(
-            "This program asks user to enter vertical and horizontal sides\n" +
-                "for envelope A and envelope B both respectively." +
-                "Then it tells if some of envelope can fit into another.\n");
+            "This program asks user to enter vertical and horizontal sides\n"
+                + "for envelope A and envelope B both respectively."
+                + "Then it tells if some of envelope can fit into another.\n"
+                + "If user wants to repeat procedure with new envelopes he types y or yes (case insensitive)\n"
+                + "after the question \"Would you like to try again?\"");
     }
 
     /**
@@ -23,9 +26,9 @@ public class Launcher {
      */
     public static void main(String[] args) {
 
-        Scanner scanner;
-        Envelope envelopeA;
-        Envelope envelopeB;
+        // locale for inputting double values with dot delimiter
+        Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
+        final String agreement = "(?i)(y|yes)";
 
         /*
         Array for temporary saving sides of both of envelopes.
@@ -36,11 +39,10 @@ public class Launcher {
          */
         double sides[] = new double[4];
 
-        final int numOfSides = sides.length; // number of sides for for-loop condition
+        do {
 
-        try {
-            do {
-                for (int i = 0; i < numOfSides; i++) {
+            try {
+                for (int i = 0; i < sides.length; i++) {
                     switch (i) {
                         case 0:
                             System.out.print("\nEnvelope A\nVertical side: ");
@@ -54,13 +56,15 @@ public class Launcher {
                         case 3:
                             System.out.print("\nHorizontal side: ");
                     }
-
-                    scanner = new Scanner(System.in).useLocale(Locale.US); // locale for inputting double values with dot delimiter
                     sides[i] = scanner.nextDouble();
+
                 }
 
-                envelopeA = Envelope.envelopeCreator(sides[0], sides[1]);
-                envelopeB = Envelope.envelopeCreator(sides[2], sides[3]);
+
+                Envelope envelopeA;
+                Envelope envelopeB;
+                envelopeA = Envelope.createEnvelope(sides[0], sides[1]);
+                envelopeB = Envelope.createEnvelope(sides[2], sides[3]);
 
                 if (envelopeA.isFitInto(envelopeB)) {
                     System.out.println("\nEnvelope A can be put in envelope B\n");
@@ -71,15 +75,13 @@ public class Launcher {
                 }
 
                 System.out.print("\nWould you like to try again? ");
-                scanner = new Scanner(System.in); // asking if user wants to continue
-
-            } while (scanner.next().matches("(?i)(y|yes)"));
-            scanner.close();
-
-        } catch (NumberFormatException e) {
-            System.out.println("Wrong arguments entered");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+            } catch (NumberFormatException | InputMismatchException e) {
+                System.out.println("Wrong arguments entered");
+                printInfo();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (scanner.next().matches(agreement));
+        scanner.close();
     }
 }

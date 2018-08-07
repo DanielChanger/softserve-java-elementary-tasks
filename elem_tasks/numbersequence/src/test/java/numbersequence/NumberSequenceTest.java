@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static numbersequence.NumberSequence.numberSequenceCreator;
+import static numbersequence.NumberSequence.createNumberSequence;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class NumberSequenceTest {
@@ -41,12 +41,12 @@ public class NumberSequenceTest {
 
     @Test(dataProvider = "illegal args for creator", expectedExceptions = IllegalArgumentException.class)
     public void testNumberSequenceCreator(int length, double minSquare) {
-        numberSequenceCreator(length, minSquare);
+        createNumberSequence(length, minSquare);
     }
 
     @Test(dataProvider = "valid args for initSequence")
     public void testGetSequence(int length, double minSquare, int[] expected) {
-        NumberSequence numberSequence = numberSequenceCreator(length, minSquare);
+        NumberSequence numberSequence = createNumberSequence(length, minSquare);
         int[] actual = numberSequence.getSequence();
         assertTrue(Arrays.equals(expected, actual));
     }

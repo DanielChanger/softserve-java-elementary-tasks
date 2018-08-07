@@ -3,7 +3,7 @@ package chess;
 /**
  * <h1>Chess board.</h1>
  *
- * <p>This app simply displays chess board with user-defined size.
+ * <p>This app simply displays chess board with user-defined size.</p>
  *
  * @author Daniel Changer.
  * @version 1.1.
@@ -21,7 +21,7 @@ public class ChessBoard {
     private final int width;
 
     /**
-     * Look of the board itself
+     * Look of the board itself.
      */
     private final StringBuilder boardRepresentation;
 
@@ -39,6 +39,7 @@ public class ChessBoard {
     }
 
     /**
+     * Method returns string representation of the board.
      * @return String representation of the board.
      */
     public String getBoardRepresentation() {
@@ -52,7 +53,7 @@ public class ChessBoard {
      * @param height count of board cells in a column.
      * @param width  count of board cells in a row.
      */
-    public static ChessBoard chessBoardCreator(int height, int width)
+    public static ChessBoard createChessBoard(int height, int width)
             throws IllegalArgumentException {
         if (height > 0 && width > 0) {
             return new ChessBoard(height, width);
@@ -62,8 +63,7 @@ public class ChessBoard {
     }
 
     /**
-     * This method creates chess board representation only one time
-     * after creating chess board instance.
+     * This method creates chess board representation only one time after creating chess board instance.
      *
      * @return Returns chess board representation
      */

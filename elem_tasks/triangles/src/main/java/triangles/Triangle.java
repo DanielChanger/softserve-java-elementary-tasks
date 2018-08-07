@@ -20,7 +20,7 @@ public class Triangle {
     }
 
 
-    public static Triangle triangleBuilder(String name, double sideA, double sideB, double sideC)
+    public static Triangle createTriangle(String name, double sideA, double sideB, double sideC)
             throws IllegalArgumentException {
         if (name == null || name.equals("")) {
             throw new IllegalArgumentException("Triangle must have a name.");
@@ -47,7 +47,6 @@ public class Triangle {
         DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
         df.setMinimumFractionDigits(0);
         df.setMaximumFractionDigits(3);
-//        String areaToString = Double.toString(area).replaceFirst("[.]0$", "");
         return String.format("[Triangle %s]: " + df.format(area) + " cm", name);
     }
 

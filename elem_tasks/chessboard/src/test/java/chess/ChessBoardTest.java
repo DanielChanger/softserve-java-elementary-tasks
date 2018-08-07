@@ -13,7 +13,8 @@ import static org.junit.Assert.assertEquals;
 public class ChessBoardTest {
 
     @RunWith(Parameterized.class)
-    public static class TestChessBoardCreator {
+    public static class TestCreateChessBoard {
+
         @Parameters
         public static Object[][] getInvalidArgs() {
             return new Object[][]{
@@ -30,18 +31,18 @@ public class ChessBoardTest {
 
         @Parameter
         public int height;
+
         @Parameter(1)
         public int width;
 
         @Test(expected = IllegalArgumentException.class)
         public void chessBoardCreator() {
-            ChessBoard.chessBoardCreator(height, width);
+            ChessBoard.createChessBoard(height, width);
         }
     }
 
     @RunWith(Parameterized.class)
     public static class TestChessBoardPaint {
-
 
         @Parameters
         public static Object[][] getValidArgs() {
@@ -82,17 +83,18 @@ public class ChessBoardTest {
 
         @Parameter
         public int height;
+
         @Parameter(1)
         public int width;
+
         @Parameter(2)
         public String expectedRepresentation;
 
         @Test
         public void getBoardRepresentation() {
-            ChessBoard chessBoard = ChessBoard.chessBoardCreator(height, width);
+            ChessBoard chessBoard = ChessBoard.createChessBoard(height, width);
             String actual = chessBoard.getBoardRepresentation();
             assertEquals(expectedRepresentation, actual);
         }
-
     }
 }

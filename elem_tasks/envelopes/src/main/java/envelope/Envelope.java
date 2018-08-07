@@ -40,7 +40,8 @@ public class Envelope implements Comparable<Envelope> {
      * @return envelope object with user-defined horizontal and vertical sides
      * @throws IllegalArgumentException occurs if user tries to create envelope with sides <= 0
      */
-    public static Envelope envelopeCreator(double verticalSide, double horizontalSide) throws IllegalArgumentException {
+
+    public static Envelope createEnvelope(double verticalSide, double horizontalSide) throws IllegalArgumentException {
         if (verticalSide <= 0 || horizontalSide <= 0) {
             throw new IllegalArgumentException("Envelope cannot consist of negative or zero attributes");
         }
@@ -68,16 +69,13 @@ public class Envelope implements Comparable<Envelope> {
     @Override
     public int compareTo(Envelope o) {
         if ((horizontalSide > o.horizontalSide && verticalSide > o.verticalSide)
-                || (horizontalSide > o.verticalSide
-                && verticalSide > o.horizontalSide)) {
+            || (horizontalSide > o.verticalSide && verticalSide > o.horizontalSide)) {
             return 1;
-
         } else if ((horizontalSide < o.horizontalSide && verticalSide < o.verticalSide)
-                || (horizontalSide < o.verticalSide
-                && verticalSide < o.horizontalSide)) {
+            || (horizontalSide < o.verticalSide && verticalSide < o.horizontalSide)) {
             return -1;
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 }
