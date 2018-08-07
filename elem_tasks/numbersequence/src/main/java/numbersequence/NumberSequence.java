@@ -1,8 +1,18 @@
 package numbersequence;
 
 public class NumberSequence {
+    /**
+     * sequence itself.
+     */
     private int[] sequence;
+    /**
+     * length of sequence.
+     */
     private int length;
+
+    /**
+     *
+     */
     private double minimalSquare;
 
     private NumberSequence(int length, double minimalSquare) {

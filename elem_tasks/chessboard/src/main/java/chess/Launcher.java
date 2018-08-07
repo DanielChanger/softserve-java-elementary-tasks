@@ -42,7 +42,7 @@ public class Launcher {
                                 + "height or width, though, you are allowed to enter only positive whole numbers)\n");
             }
         } catch (NumberFormatException e) {
-            System.out.println("You used too   number.");
+            System.out.println("You used too large number or incorrect input.");
         } catch (IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
         }

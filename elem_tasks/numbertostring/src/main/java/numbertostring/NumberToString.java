@@ -1,12 +1,12 @@
 package numbertostring;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class NumberToString {
-    private static final Map<Long, String> UNITS = new TreeMap<Long, String>();
-    private static final Map<Long, String> TENS = new TreeMap<Long, String>();
-    private static final Map<Long, String> HUNDREDS = new TreeMap<Long, String>();
+    private static final Map<Long, String> UNITS = new HashMap<Long, String>();
+    private static final Map<Long, String> TENS = new HashMap<Long, String>();
+    private static final Map<Long, String> HUNDREDS = new HashMap<Long, String>();
 
     static {
         UNITS.put(0L, "ноль");
